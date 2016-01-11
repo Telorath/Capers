@@ -205,11 +205,19 @@ namespace Capers
         {
             Powers.Add(p);
             p.User = this;
+            if (p is Buff)
+            {
+                (p as Buff).Apply(this);
+            }
         }
         public void removerpower(Power p)
         {
             Powers.Remove(p);
             p.User = null;
+            if (p is Buff)
+            {
+                (p as Buff).Remove(this);
+            }
         }
         public void Display()
         {

@@ -31,6 +31,8 @@ namespace Capers
             Bob.addpower(E);
             Bob.addpower(En);
             Bob.FullDisplay();
+            Armor Arm = new Armor();
+            Arm.
             Darkness.FullDisplay();
             Bob.Energy = 0;
             Darkness.Energy = 0;
@@ -74,6 +76,7 @@ namespace Capers
             if (Attack != null && (Attack as Power).CanUse())
             {
                 Hit = Attack.GetDamage();
+                Hit = Defender.ApplyDefense(Hit);
                 Console.WriteLine(Attacker + " attacks " + Defender + " with " + Attack + " dealing " + Hit.HealthDamage + "(" + Hit.StunDamage + " Stun) damage!");
                 Defender.GetHit(Hit);
             }

@@ -53,6 +53,10 @@ namespace Capers
         {
             EnergySource.Energy -= mEnergyCost;
         }
+        public virtual void calculatecost()
+        {
+            //Exists to be overridden.
+        }
     }
     public abstract class Buff : Power
     {
@@ -92,7 +96,7 @@ namespace Capers
             Console.WriteLine("Point Cost: " + mActiveCost + "(Active)/" + mRealCost + "(real)");
             Console.WriteLine("Energy Cost: " + mEnergyCost);
         }
-        public void calculatecost()
+        public override void calculatecost()
         {
             mBaseCost = Dice * 10;
             mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
@@ -186,7 +190,7 @@ namespace Capers
             DrawEnergy();
             return Damage;
         }
-        public void calculatecost()
+        public override void calculatecost()
         {
             mBaseCost = MeleeBonusDice * 10 + (User as Character).Str;
             mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
@@ -209,7 +213,6 @@ namespace Capers
             Target.REDEF -= REDEF;
         }
     } 
-    }
     public struct HitStruct
     {
         public int HealthDamage;
