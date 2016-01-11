@@ -26,10 +26,10 @@ namespace Capers
     }
     public abstract class Power : Entity, IDisplayable
     {
-        public int mBaseCost;
-        public int mRealCost;
-        public int mActiveCost;
-        public int mEnergyCost;
+        protected int mBaseCost;
+        protected int mRealCost;
+        protected int mActiveCost;
+        protected int mEnergyCost;
         public float mAdvantageMult;
         public float mDisadvantageMult;
         public IEnergy EnergySource;
@@ -73,6 +73,7 @@ namespace Capers
     {
         int mDice = 1;
         public damagetype mDamageType;
+        public damageclass mDamageClass = damageclass.energy;
 
         public int Dice
         {
@@ -84,6 +85,32 @@ namespace Capers
             set
             {
                 mDice = value;
+            }
+        }
+
+        public damagetype DamageType
+        {
+            get
+            {
+                return mDamageType;
+            }
+
+            set
+            {
+                mDamageType = value;
+            }
+        }
+
+        public damageclass DamageClass
+        {
+            get
+            {
+                return mDamageClass;
+            }
+
+            set
+            {
+                mDamageClass = value;
             }
         }
 
@@ -106,6 +133,7 @@ namespace Capers
         public HitStruct GetDamage()
         {
             HitStruct Damage = new HitStruct();
+            Damage.DamageClass = DamageClass;
             for (int i = 0; i < Dice; i++)
             {
                 int damage = Program.prng.Next(1, 7);
@@ -163,7 +191,36 @@ namespace Capers
     }
     public class HandtoHand : Power, IDealsDamage
     {
-        int MeleeBonusDice = 0;
+        public int MeleeBonusDice = 0;
+        private damagetype mDamageType;
+        private damageclass mDamageClass = damageclass.physical;
+
+        public damagetype DamageType
+        {
+            get
+            {
+                return mDamageType;
+            }
+
+            set
+            {
+                mDamageType = value;
+            }
+        }
+
+        public damageclass DamageClass
+        {
+            get
+            {
+                return mDamageClass;
+            }
+
+            set
+            {
+                mDamageClass = value;
+            }
+        }
+
         public HitStruct GetDamage()
         {
             calculatecost();
@@ -174,6 +231,7 @@ namespace Capers
             }
             Dice += MeleeBonusDice;
             HitStruct Damage = new HitStruct();
+            Damage.DamageClass = DamageClass;
             for (int i = 0; i < Dice; i++)
             {
                 int damage = Program.prng.Next(1, 7);
@@ -193,6 +251,65 @@ namespace Capers
         public override void calculatecost()
         {
             mBaseCost = MeleeBonusDice * 10 + (User as Character).Str;
+            mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
+            mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
+            mEnergyCost = mActiveCost / 10;
+        }
+    }
+    public class KillingAttack : Power, IDealsDamage
+    {
+        public int Dice;
+        private int StunMult;
+        public damagetype mDamageType;
+        private damageclass mDamageClass;
+
+        public damagetype DamageType
+        {
+            get
+            {
+                return mDamageType;
+            }
+
+            set
+            {
+                mDamageType = value;
+            }
+        }
+
+        public damageclass DamageClass
+        {
+            get
+            {
+                return mDamageClass;
+            }
+
+            set
+            {
+                mDamageClass = value;
+            }
+        }
+
+        public HitStruct GetDamage()
+        {
+            calculatecost();
+            HitStruct Damage = new HitStruct();
+            Damage.DamageClass = DamageClass;
+            for (int i = 0; i < Dice; i++)
+            {
+                int damage = Program.prng.Next(1, 7);
+                Damage.HealthDamage += damage;
+                Damage.StunDamage += damage * StunMult;
+            }
+            DrawEnergy();
+            return Damage;
+        }
+    }
+    public class Heal : Power
+    {
+        int mDice = 1;
+        public override void calculatecost()
+        {
+            mBaseCost = mDice * 10;
             mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
             mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
             mEnergyCost = mActiveCost / 10;

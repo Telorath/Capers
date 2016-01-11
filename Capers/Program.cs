@@ -28,6 +28,7 @@ namespace Capers
             En.Name = "Magic Missile";
             En.mDamageType = damagetype.arcane;
             En.calculatecost();
+            Bob.PDEF = 5;
             Bob.addpower(E);
             Bob.addpower(En);
             Bob.FullDisplay();

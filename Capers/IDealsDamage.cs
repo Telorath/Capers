@@ -8,6 +8,16 @@ namespace Capers
 {
     public interface IDealsDamage
     {
+        damageclass DamageClass
+        {
+            get;
+            set;
+        }
+        damagetype DamageType
+        {
+            get;
+            set;
+        }
         HitStruct GetDamage();
     }
 }
