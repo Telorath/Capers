@@ -32,8 +32,9 @@ namespace Capers
             Bob.addpower(En);
             Bob.FullDisplay();
             Armor Arm = new Armor();
-            Arm.
-            Darkness.FullDisplay();
+            Arm.RPDEF = 3;
+            Arm.REDEF = 3;
+            Darkness.addpower(Arm);
             Bob.Energy = 0;
             Darkness.Energy = 0;
             MockBattle(Bob, Darkness);
@@ -82,7 +83,8 @@ namespace Capers
             }
             else
             {
-                Console.WriteLine(Attacker + " was too tired to use any abilities this turn!");
+                Console.WriteLine(Attacker + " was too tired to use any abilities this turn and used a recovery instead!");
+                Attacker.Recovery();
             }
         }
         static HitStruct PowerHit(IDealsDamage Power, IHealth Target)

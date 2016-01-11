@@ -200,8 +200,43 @@ namespace Capers
     }
     public class Armor : Buff
     {
-        int RPDEF;
-        int REDEF;
+        int mRPDEF;
+        int mREDEF;
+        #region Interfaces
+        public int RPDEF
+        {
+            get
+            {
+                return mRPDEF;
+            }
+
+            set
+            {
+                mRPDEF = value;
+                if (mRPDEF < 0)
+                {
+                    mRPDEF = 0;
+                }
+            }
+        }
+
+        public int REDEF
+        {
+            get
+            {
+                return mREDEF;
+            }
+
+            set
+            {
+                mREDEF = value;
+                if (mREDEF < 0)
+                {
+                    mREDEF = 0;
+                }
+            }
+        }
+        #endregion
         public override void Apply(Character Target)
         {
             Target.RPDEF += RPDEF;
@@ -215,8 +250,42 @@ namespace Capers
     } 
     public struct HitStruct
     {
-        public int HealthDamage;
-        public int StunDamage;
+        private int mHealthDamage;
+        private int mStunDamage;
         public damageclass DamageClass;
+
+        public int HealthDamage
+        {
+            get
+            {
+                return mHealthDamage;
+            }
+
+            set
+            {
+                mHealthDamage = value;
+                if (mHealthDamage < 0)
+                {
+                    mHealthDamage = 0;
+                }
+            }
+        }
+
+        public int StunDamage
+        {
+            get
+            {
+                return mStunDamage;
+            }
+
+            set
+            {
+                mStunDamage = value;
+                if (mStunDamage < 0)
+                {
+                    mStunDamage = 0;
+                }
+            }
+        }
     }
 }
