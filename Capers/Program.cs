@@ -12,34 +12,41 @@ namespace Capers
         public static Random prng = new Random();
         static void Main(string[] args)
         {
-            Character Bob = Character.Load("C:\\Users\\Telorath\\Heroes\\Bob.txt");
-            Character Darkness = new Character();
-            Darkness.Name = "Darkness";
+#if false
+            Character Bob = new Character();
             Bob.Name = "Bob";
-            EnergyReserve E = new EnergyReserve();
-            E.Name = "Mana";
-            E.MaxEnergy = 10;
-            E.Energy = 10;
-            EnergyBlast En = new EnergyBlast();
-            En.EnergySource = E;
-            En.Dice = 1;
-            En.mAdvantageMult = 0.50f;
-            En.mDisadvantageMult = 0.5f;
-            En.Name = "Magic Missile";
-            En.mDamageType = damagetype.arcane;
-            En.calculatecost();
-            Bob.PDEF = 5;
-            Bob.addpower(E);
-            Bob.addpower(En);
-            Bob.FullDisplay();
-            Armor Arm = new Armor();
-            Arm.RPDEF = 3;
-            Arm.REDEF = 3;
-            Darkness.addpower(Arm);
-            Bob.Energy = 0;
-            Darkness.Energy = 0;
-            MockBattle(Bob, Darkness);
-            Bob.Save();
+            Power ERESERVE = new EnergyReserve();
+            (ERESERVE as EnergyReserve).MaxEnergy = 100;
+            (ERESERVE as EnergyReserve).Energy = 100;
+            Bob.addpower(ERESERVE);
+            Power EBLAST1 = new EnergyBlast();
+            (EBLAST1 as EnergyBlast).Dice = 2;
+            EBLAST1.EnergySource = (EnergyReserve)ERESERVE;
+            Power EBLAST2 = new EnergyBlast();
+            (EBLAST2 as EnergyBlast).Dice = 1;
+            EBLAST2.EnergySource = (EnergyReserve)ERESERVE;
+            EBLAST1.calculatecost();
+            EBLAST2.calculatecost();
+            Bob.addpower(EBLAST1);
+            Bob.addpower(EBLAST2);
+            Database.GetActiveDatabase().AddCharacter(Bob);
+            Database.GetActiveDatabase().Save();
+#endif
+#if false
+            Database Active = Database.GetActiveDatabase();
+            Active.AddCharacter(Newcharacter("Bob"));
+            Active.AddCharacter(Newcharacter("Marie"));
+            Active.AddCharacter(Newcharacter("Laura"));
+            Active.AddCharacter(Newcharacter("Robert"));
+            Active.AddCharacter(Newcharacter("Kerchik"));
+            Active.AddCharacter(Newcharacter("Maldor"));
+            Active.AddCharacter(Newcharacter("GALAVOR DESTROYER OF HUMANITY"));
+            Active.Save();
+#endif
+#if true
+            Database.LoadDatabase();
+            Database.GetActiveDatabase().ReadCharacters();
+#endif
             Console.ReadLine();
         }
         static void MockBattle(Character Bob, Character Darkness)
@@ -99,6 +106,29 @@ namespace Capers
                 StunTarget.Stun -= Hit.StunDamage;
             }
             return Hit;
+        }
+        static Character Newcharacter(string name)
+        {
+            Character C = new Character();
+            IEnergy ERESERVE = C;
+            C.Name = name;
+            int chance = prng.Next(1,101);
+            if (chance > 30)
+            {
+                ERESERVE = new EnergyReserve();
+                ERESERVE.MaxEnergy = prng.Next(1, 9) * 10;
+                (ERESERVE as Power).calculatecost();
+                C.addpower((Power)ERESERVE);
+            }
+            chance = prng.Next(1, 101);
+#if false
+            if (chance > 20)
+            {
+                EnergyBlast = new EnergyBlast();
+                
+            }
+#endif
+            return C;
         }
     }
 }

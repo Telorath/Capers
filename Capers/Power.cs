@@ -59,6 +59,7 @@ namespace Capers
             //Exists to be overridden.
         }
     }
+    [Serializable]
     public abstract class Buff : Power
     {
         public virtual void Apply(Character Target)
@@ -265,6 +266,7 @@ namespace Capers
             mEnergyCost = mActiveCost / 10;
         }
     }
+    [Serializable]
     public class KillingAttack : Power, IDealsDamage
     {
         public int Dice;
@@ -313,6 +315,7 @@ namespace Capers
             return Damage;
         }
     }
+    [Serializable]
     public class Heal : Power
     {
         int mDice = 1;
@@ -324,6 +327,7 @@ namespace Capers
             mEnergyCost = mActiveCost / 10;
         }
     }
+    [Serializable]
     public class Armor : Buff
     {
         int mRPDEF;

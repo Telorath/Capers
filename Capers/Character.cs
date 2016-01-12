@@ -301,6 +301,14 @@ namespace Capers
             formatter.Serialize(_stream, this);
             _stream.Close();
         }
+        public void FullHeal()
+        {
+            Health = MaxHealth;
+            Energy = MaxEnergy;
+            Stun = MaxStun;
+            mDead = false;
+            mKO = false;
+        }
         static public Character Load(string path)
         {
             IFormatter formatter = new BinaryFormatter();
