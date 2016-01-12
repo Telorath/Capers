@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Capers
 {
-    public class Character : Entity, IEnergy, IHealth, IStun
+    public class Character : Entity, IEnergy, IHealth, IStun, IRecovery
     {
         public List<Power> Powers = new List<Power>();
         int mHealth = 10;
@@ -247,7 +247,18 @@ namespace Capers
             PowersDisplay();
             Console.WriteLine("------------------------------------------------");
         }
-        public void Recovery()
+        public void TakeRecovery()
+        {
+            for (int i = 0; i < Powers.Count; i++)
+            {
+                if (Powers[i] is IRecovery)
+                {
+                    (Powers[i] as IRecovery).TakeRecovery();
+                }
+            }
+            QuickRecovery();
+        }
+        public void QuickRecovery()
         {
             Stun += 1;
             Energy += 1;

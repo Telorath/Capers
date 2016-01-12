@@ -51,8 +51,8 @@ namespace Capers
                 AttackRound(Darkness, Bob);
                 if (turn % 12 == 0)
                 {
-                    Bob.Recovery();
-                    Darkness.Recovery();
+                    Bob.TakeRecovery();
+                    Darkness.TakeRecovery();
                 }
                 Bob.Display();
                 Darkness.Display();
@@ -85,7 +85,7 @@ namespace Capers
             else
             {
                 Console.WriteLine(Attacker + " was too tired to use any abilities this turn and used a recovery instead!");
-                Attacker.Recovery();
+                Attacker.TakeRecovery();
             }
         }
         static HitStruct PowerHit(IDealsDamage Power, IHealth Target)

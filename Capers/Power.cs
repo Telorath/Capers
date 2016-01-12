@@ -151,7 +151,7 @@ namespace Capers
             return Damage;
         }
     }
-    public class EnergyReserve : Power, IEnergy
+    public class EnergyReserve : Power, IEnergy, IRecovery
     {
         int mEnergy;
         int mMaxEnergy;
@@ -187,6 +187,11 @@ namespace Capers
             Console.WriteLine("Power Type: Endurance Reserve");
             Console.WriteLine("Energy: " + Energy + "/" + MaxEnergy);
             Console.WriteLine("Point Cost: " + mActiveCost + "(Active)/" + mRealCost + "(real)");
+        }
+
+        public void TakeRecovery()
+        {
+            Energy += 1;
         }
     }
     public class HandtoHand : Power, IDealsDamage

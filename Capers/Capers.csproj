@@ -49,6 +49,7 @@
     <Compile Include="IDisplayable.cs" />
     <Compile Include="IEnergy.cs" />
     <Compile Include="IHealth.cs" />
+    <Compile Include="IRecovery.cs" />
     <Compile Include="IStun.cs" />
     <Compile Include="Power.cs" />
     <Compile Include="Program.cs" />
