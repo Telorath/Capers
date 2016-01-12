@@ -24,6 +24,7 @@ namespace Capers
         mental,
         arcane
     }
+    [Serializable]
     public abstract class Power : Entity, IDisplayable
     {
         protected int mBaseCost;
@@ -69,6 +70,7 @@ namespace Capers
             //Exists to be overrriden
         }
     }
+[Serializable]
     public class EnergyBlast : Power, IDealsDamage
     {
         int mDice = 1;
@@ -151,6 +153,7 @@ namespace Capers
             return Damage;
         }
     }
+    [Serializable]
     public class EnergyReserve : Power, IEnergy, IRecovery
     {
         int mEnergy;
@@ -194,6 +197,7 @@ namespace Capers
             Energy += 1;
         }
     }
+    [Serializable]
     public class HandtoHand : Power, IDealsDamage
     {
         public int MeleeBonusDice = 0;

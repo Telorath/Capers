@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Formatters;
+using System.Runtime.Serialization;
+using System.Collections;
 
 namespace Capers
 {
+    [Serializable]
     public class Character : Entity, IEnergy, IHealth, IStun, IRecovery
     {
         public List<Power> Powers = new List<Power>();
@@ -199,7 +205,7 @@ namespace Capers
             Punch.User = this;
             Punch.Name = "Punch";
             Punch.EnergySource = this;
-           (Punch as HandtoHand).calculatecost();
+            (Punch as HandtoHand).calculatecost();
         }
         public void addpower(Power p)
         {
@@ -281,6 +287,27 @@ namespace Capers
         {
             Health -= Hit.HealthDamage;
             Stun -= Hit.StunDamage;
+        }
+        public void Save()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            string path = "C:\\Users\\Telorath\\Heroes";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path = path + "\\" + Name + ".txt";
+            FileStream _stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(_stream, this);
+            _stream.Close();
+        }
+        static public Character Load(string path)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            FileStream _stream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            Character Loaded = (Character)formatter.Deserialize(_stream);
+            _stream.Close();
+            return Loaded;
         }
     }
 }

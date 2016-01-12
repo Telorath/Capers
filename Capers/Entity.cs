@@ -10,6 +10,7 @@ namespace Capers
     {
 
     }
+    [Serializable]
     public abstract class Entity
     {
         string mName;

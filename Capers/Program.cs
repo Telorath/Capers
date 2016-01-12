@@ -12,7 +12,7 @@ namespace Capers
         public static Random prng = new Random();
         static void Main(string[] args)
         {
-            Character Bob = new Character();
+            Character Bob = Character.Load("C:\\Users\\Telorath\\Heroes\\Bob.txt");
             Character Darkness = new Character();
             Darkness.Name = "Darkness";
             Bob.Name = "Bob";
@@ -39,6 +39,7 @@ namespace Capers
             Bob.Energy = 0;
             Darkness.Energy = 0;
             MockBattle(Bob, Darkness);
+            Bob.Save();
             Console.ReadLine();
         }
         static void MockBattle(Character Bob, Character Darkness)
