@@ -45,7 +45,23 @@ namespace Capers
             CharIntUpDown.Value = c.Intel;
             CharWilUpDown.Value = c.Wil;
             CharChaUpDown.Value = c.Cha;
-
+            int points = c.PointSpent;
+            PointsLabel.Text = points.ToString();
+            CharacterTierLabel.Text = "Tier: Normal";
+            if (points > 25)
+                CharacterTierLabel.Text = "Tier: Notable Normal";
+            if (points > 50)
+                CharacterTierLabel.Text = "Tier: Skilled Normal";
+            if (points > 100)
+                CharacterTierLabel.Text = "Tier: Badass Normal";
+            if (points > 150)
+                CharacterTierLabel.Text = "Tier: Low-power Super";
+            if (points > 200)
+                CharacterTierLabel.Text = "Tier: Mid-power Super";
+            if (points > 350)
+                CharacterTierLabel.Text = "Tier: High-power Super";
+            if (points > 500)
+                CharacterTierLabel.Text = "Tier: Cosmically Powerful Super";
             Selected = selectiontype.Character;
             CharacterGroupBox.Visible = true;
         }
@@ -89,6 +105,7 @@ namespace Capers
                 CharactersListBox.DataSource = null;
                 CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
                 CharactersListBox.SelectedIndex = index;
+                CharactersListBox.Sorted = true;
             }
             else
             {

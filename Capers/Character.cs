@@ -271,7 +271,7 @@ get { return mInt; }
                 foreach (Power p in Powers)
                 {
                     p.calculatecost();
-                    value += p.g
+                    value += p.PointCost;
                 }
                 return value;
             }

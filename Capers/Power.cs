@@ -59,6 +59,10 @@ namespace Capers
         {
             //Exists to be overridden.
         }
+        public int PointCost
+        {
+           get { return mRealCost; }
+        }
     }
     [Serializable]
     public abstract class Buff : Power
@@ -196,6 +200,13 @@ namespace Capers
         public void TakeRecovery()
         {
             Energy += 1;
+        }
+        public override void calculatecost()
+        {
+            mBaseCost = MaxEnergy;
+            mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
+            mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
+            mEnergyCost = mActiveCost / 10;
         }
     }
     [Serializable]
@@ -381,6 +392,14 @@ namespace Capers
             Console.WriteLine("Name: " + Name);
             Console.WriteLine("Resistant Physical Defense: " + RPDEF);
             Console.WriteLine("Resistant Energy Defense: " + REDEF);
+            Console.WriteLine("Point Cost: " + mActiveCost + "(Active)/" + mRealCost + "(real)");
+        }
+        public override void calculatecost()
+        {
+            mBaseCost = (int)(RPDEF * 1.5 + REDEF * 1.5);
+            mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
+            mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
+            mEnergyCost = 0;
         }
     } 
     public struct HitStruct
