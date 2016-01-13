@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using Capers;
 
 namespace Capers
 {
@@ -14,13 +15,13 @@ namespace Capers
     {
         [NonSerialized]
         static Database ActiveDatabase;
-        Dictionary<string,Character> Characters;
+        List<Character> Characters;
         public static Database GetActiveDatabase()
         {
             if (ActiveDatabase == null)
             {
                 ActiveDatabase = new Database();
-                ActiveDatabase.Characters = new Dictionary<string, Character>();
+                ActiveDatabase.Characters = new List<Character>();
             }
             return ActiveDatabase;
         }
@@ -52,22 +53,29 @@ namespace Capers
         }
         public Character FindCharacter(string name)
         {
-            if (Characters.ContainsKey(name))
+            for (int i = 0; i < Characters.Count; i++)
             {
-                return Characters[name];
+                if (string.Compare(name, Characters[i].Name) == 0)
+                {
+                    return Characters[i];
+                }
             }
-            else return null;
+            return null;
         }
         public void AddCharacter(Character C)
         {
-            Characters.Add(C.Name, C);
+            Characters.Add(C);
         }
         public void ReadCharacters()
         {
-            foreach (KeyValuePair<string,Character> KVP in Characters)
+            foreach (Character C in Characters)
             {
-                KVP.Value.FullDisplay();
+                C.FullDisplay();
             }
+        }
+        public List<Character> CharList()
+        {
+            return Characters;
         }
     }
 }

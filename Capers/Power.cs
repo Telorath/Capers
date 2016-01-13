@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Capers;
 
 namespace Capers
 {
@@ -77,7 +78,6 @@ namespace Capers
         int mDice = 1;
         public damagetype mDamageType;
         public damageclass mDamageClass = damageclass.energy;
-
         public int Dice
         {
             get
@@ -267,10 +267,10 @@ namespace Capers
         }
     }
     [Serializable]
-    public class KillingAttack : Power, IDealsDamage
+   public class KillingAttack : Power, IDealsDamage
     {
         public int Dice;
-        private int StunMult;
+        private int StunMult = 5;
         public damagetype mDamageType;
         private damageclass mDamageClass;
 
@@ -299,7 +299,6 @@ namespace Capers
                 mDamageClass = value;
             }
         }
-
         public HitStruct GetDamage()
         {
             calculatecost();
@@ -376,6 +375,12 @@ namespace Capers
         {
             Target.RPDEF -= RPDEF;
             Target.REDEF -= REDEF;
+        }
+        public override void Display()
+        {
+            Console.WriteLine("Name: " + Name);
+            Console.WriteLine("Resistant Physical Defense: " + RPDEF);
+            Console.WriteLine("Resistant Energy Defense: " + REDEF);
         }
     } 
     public struct HitStruct

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Timers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Capers;
 
 namespace Capers
 {
@@ -42,11 +44,14 @@ namespace Capers
             Active.AddCharacter(Newcharacter("Maldor"));
             Active.AddCharacter(Newcharacter("GALAVOR DESTROYER OF HUMANITY"));
             Active.Save();
+
 #endif
 #if true
             Database.LoadDatabase();
             Database.GetActiveDatabase().ReadCharacters();
 #endif
+            Character_Editter_Form CHARFORM = new Character_Editter_Form();
+            Application.Run(CHARFORM);
             Console.ReadLine();
         }
         static void MockBattle(Character Bob, Character Darkness)
@@ -117,17 +122,36 @@ namespace Capers
             {
                 ERESERVE = new EnergyReserve();
                 ERESERVE.MaxEnergy = prng.Next(1, 9) * 10;
+                ERESERVE.Energy = ERESERVE.MaxEnergy;
                 (ERESERVE as Power).calculatecost();
+                (ERESERVE as Entity).Name = "Energy Reserve";
+                (ERESERVE as EnergyReserve).User = C;
                 C.addpower((Power)ERESERVE);
             }
             chance = prng.Next(1, 101);
-#if false
             if (chance > 20)
             {
-                EnergyBlast = new EnergyBlast();
-                
+                EnergyBlast EBLAST = new EnergyBlast();
+                EBLAST.Name = "Energy Blast";
+                EBLAST.Dice = prng.Next(1, 6);
+                EBLAST.EnergySource = ERESERVE;
+                EBLAST.DamageClass = (damageclass)prng.Next(0, Enum.GetNames(typeof(damageclass)).Length + 1);
+                EBLAST.DamageType = (damagetype)prng.Next(0, Enum.GetNames(typeof(damagetype)).Length + 1);
+                EBLAST.User = C;
+                EBLAST.calculatecost();
+                C.addpower(EBLAST);
             }
-#endif
+            if (chance > 60)
+            {
+                Armor ARMORPOWER = new Armor();
+                ARMORPOWER.Name = "Armor";
+                ARMORPOWER.REDEF = prng.Next(1, 10);
+                ARMORPOWER.RPDEF = prng.Next(1, 10);
+                ARMORPOWER.EnergySource = ERESERVE;
+                ARMORPOWER.User = C;
+                ARMORPOWER.calculatecost();
+                C.addpower(ARMORPOWER);
+            }
             return C;
         }
     }
