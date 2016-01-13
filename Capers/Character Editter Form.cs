@@ -105,7 +105,6 @@ namespace Capers
                 CharactersListBox.DataSource = null;
                 CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
                 CharactersListBox.SelectedIndex = index;
-                CharactersListBox.Sorted = true;
             }
             else
             {
