@@ -31,14 +31,34 @@
             this.CharactersListBox = new System.Windows.Forms.ListBox();
             this.PowersListBox = new System.Windows.Forms.ListBox();
             this.CharacterGroupBox = new System.Windows.Forms.GroupBox();
+            this.CharChaLabel = new System.Windows.Forms.Label();
+            this.CharChaUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharWilLabel = new System.Windows.Forms.Label();
+            this.CharWilUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharIntLabel = new System.Windows.Forms.Label();
+            this.CharIntUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharEndLabel = new System.Windows.Forms.Label();
+            this.CharEndUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharConLabel = new System.Windows.Forms.Label();
+            this.CharConUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharAgiLabel = new System.Windows.Forms.Label();
+            this.CharAgiUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CharStrengthLabel = new System.Windows.Forms.Label();
+            this.CharStrUpDown = new System.Windows.Forms.NumericUpDown();
             this.ApplyCharacterButton = new System.Windows.Forms.Button();
             this.NameLabel = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.CharacterStrengthUpDown = new System.Windows.Forms.NumericUpDown();
-            this.StrengthLabel = new System.Windows.Forms.Label();
+            this.PointsLabel = new System.Windows.Forms.Label();
+            this.CharacterTierLabel = new System.Windows.Forms.Label();
             this.CharacterGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CharacterStrengthUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharEndUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharConUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharAgiUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharStrUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // CharactersListBox
@@ -61,8 +81,22 @@
             // 
             // CharacterGroupBox
             // 
-            this.CharacterGroupBox.Controls.Add(this.StrengthLabel);
-            this.CharacterGroupBox.Controls.Add(this.CharacterStrengthUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharacterTierLabel);
+            this.CharacterGroupBox.Controls.Add(this.PointsLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharChaLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharChaUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharWilLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharWilUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharIntLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharIntUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharEndLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharEndUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharConLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharConUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharAgiLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharAgiUpDown);
+            this.CharacterGroupBox.Controls.Add(this.CharStrengthLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharStrUpDown);
             this.CharacterGroupBox.Controls.Add(this.ApplyCharacterButton);
             this.CharacterGroupBox.Controls.Add(this.NameLabel);
             this.CharacterGroupBox.Controls.Add(this.NameTextBox);
@@ -71,6 +105,118 @@
             this.CharacterGroupBox.Size = new System.Drawing.Size(740, 521);
             this.CharacterGroupBox.TabIndex = 2;
             this.CharacterGroupBox.TabStop = false;
+            // 
+            // CharChaLabel
+            // 
+            this.CharChaLabel.AutoSize = true;
+            this.CharChaLabel.Location = new System.Drawing.Point(52, 207);
+            this.CharChaLabel.Name = "CharChaLabel";
+            this.CharChaLabel.Size = new System.Drawing.Size(53, 13);
+            this.CharChaLabel.TabIndex = 16;
+            this.CharChaLabel.Text = "Charisma:";
+            // 
+            // CharChaUpDown
+            // 
+            this.CharChaUpDown.Location = new System.Drawing.Point(125, 205);
+            this.CharChaUpDown.Name = "CharChaUpDown";
+            this.CharChaUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharChaUpDown.TabIndex = 15;
+            // 
+            // CharWilLabel
+            // 
+            this.CharWilLabel.AutoSize = true;
+            this.CharWilLabel.Location = new System.Drawing.Point(52, 177);
+            this.CharWilLabel.Name = "CharWilLabel";
+            this.CharWilLabel.Size = new System.Drawing.Size(56, 13);
+            this.CharWilLabel.TabIndex = 14;
+            this.CharWilLabel.Text = "Willpower:";
+            // 
+            // CharWilUpDown
+            // 
+            this.CharWilUpDown.Location = new System.Drawing.Point(125, 175);
+            this.CharWilUpDown.Name = "CharWilUpDown";
+            this.CharWilUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharWilUpDown.TabIndex = 13;
+            // 
+            // CharIntLabel
+            // 
+            this.CharIntLabel.AutoSize = true;
+            this.CharIntLabel.Location = new System.Drawing.Point(52, 151);
+            this.CharIntLabel.Name = "CharIntLabel";
+            this.CharIntLabel.Size = new System.Drawing.Size(67, 13);
+            this.CharIntLabel.TabIndex = 12;
+            this.CharIntLabel.Text = "Intelligence: ";
+            // 
+            // CharIntUpDown
+            // 
+            this.CharIntUpDown.Location = new System.Drawing.Point(125, 149);
+            this.CharIntUpDown.Name = "CharIntUpDown";
+            this.CharIntUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharIntUpDown.TabIndex = 11;
+            // 
+            // CharEndLabel
+            // 
+            this.CharEndLabel.AutoSize = true;
+            this.CharEndLabel.Location = new System.Drawing.Point(52, 125);
+            this.CharEndLabel.Name = "CharEndLabel";
+            this.CharEndLabel.Size = new System.Drawing.Size(62, 13);
+            this.CharEndLabel.TabIndex = 10;
+            this.CharEndLabel.Text = "Endurance:";
+            // 
+            // CharEndUpDown
+            // 
+            this.CharEndUpDown.Location = new System.Drawing.Point(125, 123);
+            this.CharEndUpDown.Name = "CharEndUpDown";
+            this.CharEndUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharEndUpDown.TabIndex = 9;
+            // 
+            // CharConLabel
+            // 
+            this.CharConLabel.AutoSize = true;
+            this.CharConLabel.Location = new System.Drawing.Point(52, 99);
+            this.CharConLabel.Name = "CharConLabel";
+            this.CharConLabel.Size = new System.Drawing.Size(65, 13);
+            this.CharConLabel.TabIndex = 8;
+            this.CharConLabel.Text = "Constitution:";
+            // 
+            // CharConUpDown
+            // 
+            this.CharConUpDown.Location = new System.Drawing.Point(125, 97);
+            this.CharConUpDown.Name = "CharConUpDown";
+            this.CharConUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharConUpDown.TabIndex = 7;
+            // 
+            // CharAgiLabel
+            // 
+            this.CharAgiLabel.AutoSize = true;
+            this.CharAgiLabel.Location = new System.Drawing.Point(52, 73);
+            this.CharAgiLabel.Name = "CharAgiLabel";
+            this.CharAgiLabel.Size = new System.Drawing.Size(37, 13);
+            this.CharAgiLabel.TabIndex = 6;
+            this.CharAgiLabel.Text = "Agility:";
+            // 
+            // CharAgiUpDown
+            // 
+            this.CharAgiUpDown.Location = new System.Drawing.Point(125, 71);
+            this.CharAgiUpDown.Name = "CharAgiUpDown";
+            this.CharAgiUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharAgiUpDown.TabIndex = 5;
+            // 
+            // CharStrengthLabel
+            // 
+            this.CharStrengthLabel.AutoSize = true;
+            this.CharStrengthLabel.Location = new System.Drawing.Point(52, 47);
+            this.CharStrengthLabel.Name = "CharStrengthLabel";
+            this.CharStrengthLabel.Size = new System.Drawing.Size(50, 13);
+            this.CharStrengthLabel.TabIndex = 4;
+            this.CharStrengthLabel.Text = "Strength:";
+            // 
+            // CharStrUpDown
+            // 
+            this.CharStrUpDown.Location = new System.Drawing.Point(125, 45);
+            this.CharStrUpDown.Name = "CharStrUpDown";
+            this.CharStrUpDown.Size = new System.Drawing.Size(237, 20);
+            this.CharStrUpDown.TabIndex = 3;
             // 
             // ApplyCharacterButton
             // 
@@ -85,7 +231,7 @@
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(64, 22);
+            this.NameLabel.Location = new System.Drawing.Point(52, 22);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(41, 13);
             this.NameLabel.TabIndex = 1;
@@ -108,21 +254,23 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // CharacterStrengthUpDown
+            // PointsLabel
             // 
-            this.CharacterStrengthUpDown.Location = new System.Drawing.Point(125, 45);
-            this.CharacterStrengthUpDown.Name = "CharacterStrengthUpDown";
-            this.CharacterStrengthUpDown.Size = new System.Drawing.Size(237, 20);
-            this.CharacterStrengthUpDown.TabIndex = 3;
+            this.PointsLabel.AutoSize = true;
+            this.PointsLabel.Location = new System.Drawing.Point(52, 464);
+            this.PointsLabel.Name = "PointsLabel";
+            this.PointsLabel.Size = new System.Drawing.Size(42, 13);
+            this.PointsLabel.TabIndex = 17;
+            this.PointsLabel.Text = "Points: ";
             // 
-            // StrengthLabel
+            // CharacterTierLabel
             // 
-            this.StrengthLabel.AutoSize = true;
-            this.StrengthLabel.Location = new System.Drawing.Point(52, 47);
-            this.StrengthLabel.Name = "StrengthLabel";
-            this.StrengthLabel.Size = new System.Drawing.Size(53, 13);
-            this.StrengthLabel.TabIndex = 4;
-            this.StrengthLabel.Text = "Strength: ";
+            this.CharacterTierLabel.AutoSize = true;
+            this.CharacterTierLabel.Location = new System.Drawing.Point(52, 492);
+            this.CharacterTierLabel.Name = "CharacterTierLabel";
+            this.CharacterTierLabel.Size = new System.Drawing.Size(64, 13);
+            this.CharacterTierLabel.TabIndex = 18;
+            this.CharacterTierLabel.Text = "Tier: Normal";
             // 
             // Character_Editter_Form
             // 
@@ -137,7 +285,13 @@
             this.Text = "Character_Editter_Form";
             this.CharacterGroupBox.ResumeLayout(false);
             this.CharacterGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CharacterStrengthUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharEndUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharConUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharAgiUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CharStrUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,7 +305,21 @@
         private System.Windows.Forms.Button ApplyCharacterButton;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.Label StrengthLabel;
-        private System.Windows.Forms.NumericUpDown CharacterStrengthUpDown;
+        private System.Windows.Forms.Label CharStrengthLabel;
+        private System.Windows.Forms.NumericUpDown CharStrUpDown;
+        private System.Windows.Forms.Label CharChaLabel;
+        private System.Windows.Forms.NumericUpDown CharChaUpDown;
+        private System.Windows.Forms.Label CharWilLabel;
+        private System.Windows.Forms.NumericUpDown CharWilUpDown;
+        private System.Windows.Forms.Label CharIntLabel;
+        private System.Windows.Forms.NumericUpDown CharIntUpDown;
+        private System.Windows.Forms.Label CharEndLabel;
+        private System.Windows.Forms.NumericUpDown CharEndUpDown;
+        private System.Windows.Forms.Label CharConLabel;
+        private System.Windows.Forms.NumericUpDown CharConUpDown;
+        private System.Windows.Forms.Label CharAgiLabel;
+        private System.Windows.Forms.NumericUpDown CharAgiUpDown;
+        private System.Windows.Forms.Label CharacterTierLabel;
+        private System.Windows.Forms.Label PointsLabel;
     }
 }

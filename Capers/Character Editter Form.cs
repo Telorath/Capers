@@ -38,13 +38,21 @@ namespace Capers
             PowersListBox.DataSource = c.Powers;
             PowersListBox.SelectedIndex = -1;
             NameTextBox.Text = c.Name;
-CharacterStrengthUpDown.Value =  c.Str;
+            CharStrUpDown.Value = c.Str;
+            CharConUpDown.Value = c.End;
+            CharEndUpDown.Value = c.End;
+            CharAgiUpDown.Value = c.Agi;
+            CharIntUpDown.Value = c.Intel;
+            CharWilUpDown.Value = c.Wil;
+            CharChaUpDown.Value = c.Cha;
+
             Selected = selectiontype.Character;
             CharacterGroupBox.Visible = true;
         }
 
         private void PowersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CharacterGroupBox.Visible = false;
             if (PowersListBox.SelectedIndex < 0)
             {
                 return;
@@ -64,7 +72,6 @@ CharacterStrengthUpDown.Value =  c.Str;
                 Selected = selectiontype.Armor;
             }
         }
-
         private void ApplyButton_Click(object sender, EventArgs e)
         {
             if (Selected == selectiontype.Character)
@@ -72,6 +79,13 @@ CharacterStrengthUpDown.Value =  c.Str;
                 int index = CharactersListBox.SelectedIndex;
                 Character c = (Character)CharactersListBox.SelectedItem;
                 c.Name = NameTextBox.Text;
+                c.Str = (int)CharStrUpDown.Value;
+                c.Con = (int)CharConUpDown.Value;
+                c.End = (int)CharEndUpDown.Value;
+                c.Agi = (int)CharAgiUpDown.Value;
+                c.Intel = (int)CharIntUpDown.Value;
+                c.Wil = (int)CharWilUpDown.Value;
+                c.Cha = (int)CharChaUpDown.Value;
                 CharactersListBox.DataSource = null;
                 CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
                 CharactersListBox.SelectedIndex = index;

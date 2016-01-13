@@ -15,21 +15,30 @@ namespace Capers
     public class Character : Entity, IEnergy, IHealth, IStun, IRecovery
     {
         public List<Power> Powers = new List<Power>();
+        //Resources
         int mHealth = 10;
         int mMaxHealth = 10;
         int mStun = 10;
         int mMaxStun = 10;
         int mEnergy = 10;
         int mMaxEnergy = 10;
+        //Core stats
         int mStr = 10;
-        int mPDEF = 0;
+        int mCon = 10;
+        int mEnd = 10;
+        int mAgi = 10;
+        int mInt = 10;
+        int mWil = 10;
+        int mCha = 10;
+        //Secondary Stats
+        int mPDEF = 2;
         int mRPDEF = 0;
-        int mEDEF = 0;
+        int mEDEF = 2;
         int mREDEF = 0;
         public IDealsDamage DefaultAttack;
         public bool mKO = false;
         public bool mDead = false;
-        #region Interfaces
+        #region Properties
         public int Health
         {
             get
@@ -133,18 +142,7 @@ namespace Capers
             get { return mDead; }
         }
 
-        public int Str
-        {
-            get
-            {
-                return mStr;
-            }
 
-            set
-            {
-                mStr = value;
-            }
-        }
 
         public int PDEF
         {
@@ -195,6 +193,87 @@ namespace Capers
             set
             {
                 mREDEF = value;
+            }
+        }
+        public int Str
+        {
+            get
+            {
+                return mStr;
+            }
+
+            set
+            {
+                mStr = value;
+                if (mStr < 0)
+                {
+                    mStr = 0;
+                }
+            }
+        }
+        public int Con
+        {
+            get
+            {
+                return mCon;
+            }
+            set
+            {
+                mCon = value;
+                if (mCon < 0)
+                {
+                    mCon = 0;
+                }
+            }
+        }
+        public int End
+        {
+            get { return mEnd; }
+            set { mEnd = value; }
+        }
+        public int Agi
+        {
+            get
+            {
+                return mAgi;
+            }
+            set
+            {
+                mAgi = value;
+            }
+        }
+        public int Intel
+        {
+get { return mInt; }
+            set { mInt = value; }
+        }
+        public int Wil
+        {
+            get { return mWil; }
+            set { mWil = value; }
+        }
+        public int Cha
+        {
+            get { return mWil; }
+            set { mWil = value; }
+        }
+        public int PointSpent
+        {
+            get {
+                int value = 0;
+                value += (Str - 10);
+                value += (Con - 10) * 2;
+                value += (End - 10) * 2;
+                value += (Agi - 10);
+                value += (Intel - 10);
+                value += (Wil - 10) * 2;
+                value += (Cha - 10);
+                foreach (Power p in Powers)
+                {
+                    p.calculatecost();
+                    value += p.g
+                }
+                return value;
             }
         }
         #endregion
