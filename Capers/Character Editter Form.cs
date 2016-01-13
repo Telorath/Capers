@@ -120,5 +120,24 @@ namespace Capers
         {
             Database.GetActiveDatabase().Save();
         }
+
+        private void AddCharButton_Click(object sender, EventArgs e)
+        {
+            Character C = new Character();
+            C.Name = "New Character";
+            Database.GetActiveDatabase().AddCharacter(C);
+            CharactersListBox.DataSource = null;
+            CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
+        }
+
+        private void DeleteCharButton_Click(object sender, EventArgs e)
+        {
+            if (CharactersListBox.SelectedIndex < 0)
+                return;
+            Character c = (Character)CharactersListBox.SelectedItem;
+            Database.GetActiveDatabase().RemoveCharacter(c);
+            CharactersListBox.DataSource = null;
+            CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
+        }
     }
 }

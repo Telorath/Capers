@@ -31,6 +31,8 @@
             this.CharactersListBox = new System.Windows.Forms.ListBox();
             this.PowersListBox = new System.Windows.Forms.ListBox();
             this.CharacterGroupBox = new System.Windows.Forms.GroupBox();
+            this.CharacterTierLabel = new System.Windows.Forms.Label();
+            this.PointsLabel = new System.Windows.Forms.Label();
             this.CharChaLabel = new System.Windows.Forms.Label();
             this.CharChaUpDown = new System.Windows.Forms.NumericUpDown();
             this.CharWilLabel = new System.Windows.Forms.Label();
@@ -49,8 +51,8 @@
             this.NameLabel = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.PointsLabel = new System.Windows.Forms.Label();
-            this.CharacterTierLabel = new System.Windows.Forms.Label();
+            this.AddCharButton = new System.Windows.Forms.Button();
+            this.DeleteCharButton = new System.Windows.Forms.Button();
             this.CharacterGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).BeginInit();
@@ -105,6 +107,24 @@
             this.CharacterGroupBox.Size = new System.Drawing.Size(740, 521);
             this.CharacterGroupBox.TabIndex = 2;
             this.CharacterGroupBox.TabStop = false;
+            // 
+            // CharacterTierLabel
+            // 
+            this.CharacterTierLabel.AutoSize = true;
+            this.CharacterTierLabel.Location = new System.Drawing.Point(52, 492);
+            this.CharacterTierLabel.Name = "CharacterTierLabel";
+            this.CharacterTierLabel.Size = new System.Drawing.Size(64, 13);
+            this.CharacterTierLabel.TabIndex = 18;
+            this.CharacterTierLabel.Text = "Tier: Normal";
+            // 
+            // PointsLabel
+            // 
+            this.PointsLabel.AutoSize = true;
+            this.PointsLabel.Location = new System.Drawing.Point(52, 464);
+            this.PointsLabel.Name = "PointsLabel";
+            this.PointsLabel.Size = new System.Drawing.Size(42, 13);
+            this.PointsLabel.TabIndex = 17;
+            this.PointsLabel.Text = "Points: ";
             // 
             // CharChaLabel
             // 
@@ -254,29 +274,33 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // PointsLabel
+            // AddCharButton
             // 
-            this.PointsLabel.AutoSize = true;
-            this.PointsLabel.Location = new System.Drawing.Point(52, 464);
-            this.PointsLabel.Name = "PointsLabel";
-            this.PointsLabel.Size = new System.Drawing.Size(42, 13);
-            this.PointsLabel.TabIndex = 17;
-            this.PointsLabel.Text = "Points: ";
+            this.AddCharButton.Location = new System.Drawing.Point(12, 243);
+            this.AddCharButton.Name = "AddCharButton";
+            this.AddCharButton.Size = new System.Drawing.Size(75, 23);
+            this.AddCharButton.TabIndex = 4;
+            this.AddCharButton.Text = "Add";
+            this.AddCharButton.UseVisualStyleBackColor = true;
+            this.AddCharButton.Click += new System.EventHandler(this.AddCharButton_Click);
             // 
-            // CharacterTierLabel
+            // DeleteCharButton
             // 
-            this.CharacterTierLabel.AutoSize = true;
-            this.CharacterTierLabel.Location = new System.Drawing.Point(52, 492);
-            this.CharacterTierLabel.Name = "CharacterTierLabel";
-            this.CharacterTierLabel.Size = new System.Drawing.Size(64, 13);
-            this.CharacterTierLabel.TabIndex = 18;
-            this.CharacterTierLabel.Text = "Tier: Normal";
+            this.DeleteCharButton.Location = new System.Drawing.Point(198, 243);
+            this.DeleteCharButton.Name = "DeleteCharButton";
+            this.DeleteCharButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteCharButton.TabIndex = 5;
+            this.DeleteCharButton.Text = "Delete";
+            this.DeleteCharButton.UseVisualStyleBackColor = true;
+            this.DeleteCharButton.Click += new System.EventHandler(this.DeleteCharButton_Click);
             // 
             // Character_Editter_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 565);
+            this.Controls.Add(this.DeleteCharButton);
+            this.Controls.Add(this.AddCharButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CharacterGroupBox);
             this.Controls.Add(this.PowersListBox);
@@ -321,5 +345,7 @@
         private System.Windows.Forms.NumericUpDown CharAgiUpDown;
         private System.Windows.Forms.Label CharacterTierLabel;
         private System.Windows.Forms.Label PointsLabel;
+        private System.Windows.Forms.Button AddCharButton;
+        private System.Windows.Forms.Button DeleteCharButton;
     }
 }

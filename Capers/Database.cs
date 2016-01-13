@@ -66,6 +66,10 @@ namespace Capers
         {
             Characters.Add(C);
         }
+        public void RemoveCharacter(Character c)
+        {
+            Characters.Remove(c);
+        }
         public void ReadCharacters()
         {
             foreach (Character C in Characters)

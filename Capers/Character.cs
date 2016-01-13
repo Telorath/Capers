@@ -254,8 +254,8 @@ get { return mInt; }
         }
         public int Cha
         {
-            get { return mWil; }
-            set { mWil = value; }
+            get { return mCha; }
+            set { mCha = value; }
         }
         public int PointSpent
         {
