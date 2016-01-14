@@ -31,6 +31,14 @@
             this.CharactersListBox = new System.Windows.Forms.ListBox();
             this.PowersListBox = new System.Windows.Forms.ListBox();
             this.CharacterGroupBox = new System.Windows.Forms.GroupBox();
+            this.EnergyReserveGroupBox = new System.Windows.Forms.GroupBox();
+            this.EnergyReservePointCostLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveRecoveryUpDown = new System.Windows.Forms.NumericUpDown();
+            this.EnergyReserveRecoveryLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveMaxEnergyUpDown = new System.Windows.Forms.NumericUpDown();
+            this.EnergyReserveMaxEnergyLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveNameTextBox = new System.Windows.Forms.TextBox();
+            this.EnergyReserveNameLabel = new System.Windows.Forms.Label();
             this.CharacterTierLabel = new System.Windows.Forms.Label();
             this.PointsLabel = new System.Windows.Forms.Label();
             this.CharChaLabel = new System.Windows.Forms.Label();
@@ -48,12 +56,19 @@
             this.CharStrengthLabel = new System.Windows.Forms.Label();
             this.CharStrUpDown = new System.Windows.Forms.NumericUpDown();
             this.ApplyCharacterButton = new System.Windows.Forms.Button();
-            this.NameLabel = new System.Windows.Forms.Label();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.CharNameLabel = new System.Windows.Forms.Label();
+            this.CharNameTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.AddCharButton = new System.Windows.Forms.Button();
             this.DeleteCharButton = new System.Windows.Forms.Button();
+            this.AddPowerButton = new System.Windows.Forms.Button();
+            this.DeletePowerButton = new System.Windows.Forms.Button();
+            this.PowerTypeSelectionComboBox = new System.Windows.Forms.ComboBox();
+            this.ApplyEnergyReserveButton = new System.Windows.Forms.Button();
             this.CharacterGroupBox.SuspendLayout();
+            this.EnergyReserveGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).BeginInit();
@@ -100,13 +115,86 @@
             this.CharacterGroupBox.Controls.Add(this.CharStrengthLabel);
             this.CharacterGroupBox.Controls.Add(this.CharStrUpDown);
             this.CharacterGroupBox.Controls.Add(this.ApplyCharacterButton);
-            this.CharacterGroupBox.Controls.Add(this.NameLabel);
-            this.CharacterGroupBox.Controls.Add(this.NameTextBox);
+            this.CharacterGroupBox.Controls.Add(this.CharNameLabel);
+            this.CharacterGroupBox.Controls.Add(this.CharNameTextBox);
             this.CharacterGroupBox.Location = new System.Drawing.Point(279, 12);
             this.CharacterGroupBox.Name = "CharacterGroupBox";
             this.CharacterGroupBox.Size = new System.Drawing.Size(740, 521);
             this.CharacterGroupBox.TabIndex = 2;
             this.CharacterGroupBox.TabStop = false;
+            // 
+            // EnergyReserveGroupBox
+            // 
+            this.EnergyReserveGroupBox.Controls.Add(this.ApplyEnergyReserveButton);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReservePointCostLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryUpDown);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyUpDown);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameTextBox);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameLabel);
+            this.EnergyReserveGroupBox.Location = new System.Drawing.Point(279, 6);
+            this.EnergyReserveGroupBox.Name = "EnergyReserveGroupBox";
+            this.EnergyReserveGroupBox.Size = new System.Drawing.Size(740, 521);
+            this.EnergyReserveGroupBox.TabIndex = 8;
+            this.EnergyReserveGroupBox.TabStop = false;
+            // 
+            // EnergyReservePointCostLabel
+            // 
+            this.EnergyReservePointCostLabel.AutoSize = true;
+            this.EnergyReservePointCostLabel.Location = new System.Drawing.Point(27, 492);
+            this.EnergyReservePointCostLabel.Name = "EnergyReservePointCostLabel";
+            this.EnergyReservePointCostLabel.Size = new System.Drawing.Size(58, 13);
+            this.EnergyReservePointCostLabel.TabIndex = 6;
+            this.EnergyReservePointCostLabel.Text = "Point Cost:";
+            // 
+            // EnergyReserveRecoveryUpDown
+            // 
+            this.EnergyReserveRecoveryUpDown.Location = new System.Drawing.Point(74, 97);
+            this.EnergyReserveRecoveryUpDown.Name = "EnergyReserveRecoveryUpDown";
+            this.EnergyReserveRecoveryUpDown.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveRecoveryUpDown.TabIndex = 5;
+            // 
+            // EnergyReserveRecoveryLabel
+            // 
+            this.EnergyReserveRecoveryLabel.AutoSize = true;
+            this.EnergyReserveRecoveryLabel.Location = new System.Drawing.Point(6, 97);
+            this.EnergyReserveRecoveryLabel.Name = "EnergyReserveRecoveryLabel";
+            this.EnergyReserveRecoveryLabel.Size = new System.Drawing.Size(56, 13);
+            this.EnergyReserveRecoveryLabel.TabIndex = 4;
+            this.EnergyReserveRecoveryLabel.Text = "Recovery:";
+            // 
+            // EnergyReserveMaxEnergyUpDown
+            // 
+            this.EnergyReserveMaxEnergyUpDown.Location = new System.Drawing.Point(74, 58);
+            this.EnergyReserveMaxEnergyUpDown.Name = "EnergyReserveMaxEnergyUpDown";
+            this.EnergyReserveMaxEnergyUpDown.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveMaxEnergyUpDown.TabIndex = 3;
+            // 
+            // EnergyReserveMaxEnergyLabel
+            // 
+            this.EnergyReserveMaxEnergyLabel.AutoSize = true;
+            this.EnergyReserveMaxEnergyLabel.Location = new System.Drawing.Point(6, 60);
+            this.EnergyReserveMaxEnergyLabel.Name = "EnergyReserveMaxEnergyLabel";
+            this.EnergyReserveMaxEnergyLabel.Size = new System.Drawing.Size(66, 13);
+            this.EnergyReserveMaxEnergyLabel.TabIndex = 2;
+            this.EnergyReserveMaxEnergyLabel.Text = "Max Energy:";
+            // 
+            // EnergyReserveNameTextBox
+            // 
+            this.EnergyReserveNameTextBox.Location = new System.Drawing.Point(74, 19);
+            this.EnergyReserveNameTextBox.Name = "EnergyReserveNameTextBox";
+            this.EnergyReserveNameTextBox.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveNameTextBox.TabIndex = 1;
+            // 
+            // EnergyReserveNameLabel
+            // 
+            this.EnergyReserveNameLabel.AutoSize = true;
+            this.EnergyReserveNameLabel.Location = new System.Drawing.Point(6, 19);
+            this.EnergyReserveNameLabel.Name = "EnergyReserveNameLabel";
+            this.EnergyReserveNameLabel.Size = new System.Drawing.Size(41, 13);
+            this.EnergyReserveNameLabel.TabIndex = 0;
+            this.EnergyReserveNameLabel.Text = "Name: ";
             // 
             // CharacterTierLabel
             // 
@@ -248,21 +336,21 @@
             this.ApplyCharacterButton.UseVisualStyleBackColor = true;
             this.ApplyCharacterButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
-            // NameLabel
+            // CharNameLabel
             // 
-            this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(52, 22);
-            this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(41, 13);
-            this.NameLabel.TabIndex = 1;
-            this.NameLabel.Text = "Name: ";
+            this.CharNameLabel.AutoSize = true;
+            this.CharNameLabel.Location = new System.Drawing.Point(52, 22);
+            this.CharNameLabel.Name = "CharNameLabel";
+            this.CharNameLabel.Size = new System.Drawing.Size(41, 13);
+            this.CharNameLabel.TabIndex = 1;
+            this.CharNameLabel.Text = "Name: ";
             // 
-            // NameTextBox
+            // CharNameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(125, 19);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(592, 20);
-            this.NameTextBox.TabIndex = 0;
+            this.CharNameTextBox.Location = new System.Drawing.Point(125, 19);
+            this.CharNameTextBox.Name = "CharNameTextBox";
+            this.CharNameTextBox.Size = new System.Drawing.Size(592, 20);
+            this.CharNameTextBox.TabIndex = 0;
             // 
             // SaveButton
             // 
@@ -294,21 +382,67 @@
             this.DeleteCharButton.UseVisualStyleBackColor = true;
             this.DeleteCharButton.Click += new System.EventHandler(this.DeleteCharButton_Click);
             // 
+            // AddPowerButton
+            // 
+            this.AddPowerButton.Location = new System.Drawing.Point(12, 476);
+            this.AddPowerButton.Name = "AddPowerButton";
+            this.AddPowerButton.Size = new System.Drawing.Size(75, 23);
+            this.AddPowerButton.TabIndex = 6;
+            this.AddPowerButton.Text = "Add";
+            this.AddPowerButton.UseVisualStyleBackColor = true;
+            this.AddPowerButton.Click += new System.EventHandler(this.AddPowerButton_Click);
+            // 
+            // DeletePowerButton
+            // 
+            this.DeletePowerButton.Location = new System.Drawing.Point(198, 476);
+            this.DeletePowerButton.Name = "DeletePowerButton";
+            this.DeletePowerButton.Size = new System.Drawing.Size(75, 23);
+            this.DeletePowerButton.TabIndex = 7;
+            this.DeletePowerButton.Text = "Delete";
+            this.DeletePowerButton.UseVisualStyleBackColor = true;
+            this.DeletePowerButton.Click += new System.EventHandler(this.DeletePowerButton_Click);
+            // 
+            // PowerTypeSelectionComboBox
+            // 
+            this.PowerTypeSelectionComboBox.FormattingEnabled = true;
+            this.PowerTypeSelectionComboBox.Location = new System.Drawing.Point(93, 478);
+            this.PowerTypeSelectionComboBox.Name = "PowerTypeSelectionComboBox";
+            this.PowerTypeSelectionComboBox.Size = new System.Drawing.Size(99, 21);
+            this.PowerTypeSelectionComboBox.TabIndex = 8;
+            // 
+            // ApplyEnergyReserveButton
+            // 
+            this.ApplyEnergyReserveButton.Location = new System.Drawing.Point(642, 487);
+            this.ApplyEnergyReserveButton.Name = "ApplyEnergyReserveButton";
+            this.ApplyEnergyReserveButton.Size = new System.Drawing.Size(75, 23);
+            this.ApplyEnergyReserveButton.TabIndex = 7;
+            this.ApplyEnergyReserveButton.Text = "Apply";
+            this.ApplyEnergyReserveButton.UseVisualStyleBackColor = true;
+            this.ApplyEnergyReserveButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            // 
             // Character_Editter_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 565);
+            this.Controls.Add(this.PowerTypeSelectionComboBox);
+            this.Controls.Add(this.DeletePowerButton);
+            this.Controls.Add(this.AddPowerButton);
             this.Controls.Add(this.DeleteCharButton);
             this.Controls.Add(this.AddCharButton);
             this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.CharacterGroupBox);
             this.Controls.Add(this.PowersListBox);
             this.Controls.Add(this.CharactersListBox);
+            this.Controls.Add(this.EnergyReserveGroupBox);
+            this.Controls.Add(this.CharacterGroupBox);
             this.Name = "Character_Editter_Form";
             this.Text = "Character_Editter_Form";
             this.CharacterGroupBox.ResumeLayout(false);
             this.CharacterGroupBox.PerformLayout();
+            this.EnergyReserveGroupBox.ResumeLayout(false);
+            this.EnergyReserveGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).EndInit();
@@ -325,9 +459,9 @@
         private System.Windows.Forms.ListBox CharactersListBox;
         private System.Windows.Forms.ListBox PowersListBox;
         private System.Windows.Forms.GroupBox CharacterGroupBox;
-        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.TextBox CharNameTextBox;
         private System.Windows.Forms.Button ApplyCharacterButton;
-        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.Label CharNameLabel;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label CharStrengthLabel;
         private System.Windows.Forms.NumericUpDown CharStrUpDown;
@@ -347,5 +481,17 @@
         private System.Windows.Forms.Label PointsLabel;
         private System.Windows.Forms.Button AddCharButton;
         private System.Windows.Forms.Button DeleteCharButton;
+        private System.Windows.Forms.Button AddPowerButton;
+        private System.Windows.Forms.Button DeletePowerButton;
+        private System.Windows.Forms.GroupBox EnergyReserveGroupBox;
+        private System.Windows.Forms.Label EnergyReserveNameLabel;
+        private System.Windows.Forms.NumericUpDown EnergyReserveRecoveryUpDown;
+        private System.Windows.Forms.Label EnergyReserveRecoveryLabel;
+        private System.Windows.Forms.NumericUpDown EnergyReserveMaxEnergyUpDown;
+        private System.Windows.Forms.Label EnergyReserveMaxEnergyLabel;
+        private System.Windows.Forms.TextBox EnergyReserveNameTextBox;
+        private System.Windows.Forms.Label EnergyReservePointCostLabel;
+        private System.Windows.Forms.ComboBox PowerTypeSelectionComboBox;
+        private System.Windows.Forms.Button ApplyEnergyReserveButton;
     }
 }

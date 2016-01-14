@@ -24,8 +24,10 @@ namespace Capers
         {
             InitializeComponent();
             CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
-            CharactersListBox.SelectedIndex = 0;
+            CharactersListBox.SelectedIndex = -1;
+            PowerTypeSelectionComboBox.Items.Add("Energy Reserve");
             CharacterGroupBox.Visible = false;
+            EnergyReserveGroupBox.Visible = false;
         }
 
         private void CharactersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace Capers
             Character c = (Character)CharactersListBox.Items[CharactersListBox.SelectedIndex];
             PowersListBox.DataSource = c.Powers;
             PowersListBox.SelectedIndex = -1;
-            NameTextBox.Text = c.Name;
+            CharNameTextBox.Text = c.Name;
             CharStrUpDown.Value = c.Str;
             CharConUpDown.Value = c.End;
             CharEndUpDown.Value = c.End;
@@ -64,6 +66,7 @@ namespace Capers
                 CharacterTierLabel.Text = "Tier: Cosmically Powerful Super";
             Selected = selectiontype.Character;
             CharacterGroupBox.Visible = true;
+            EnergyReserveGroupBox.Visible = false;
         }
 
         private void PowersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,10 +77,18 @@ namespace Capers
                 return;
             }
             Power p = (Power)PowersListBox.Items[PowersListBox.SelectedIndex];
-            NameTextBox.Text = p.Name;
+            CharNameTextBox.Text = p.Name;
             if (p is EnergyReserve)
             {
                 Selected = selectiontype.Energy_Reserve;
+                EnergyReserve EnRes = (EnergyReserve)p;
+                EnRes.calculatecost();
+                EnergyReservePointCostLabel.Text = "Cost: " + EnRes.PointCost;
+                EnergyReserveNameTextBox.Text = EnRes.Name;
+                EnergyReserveMaxEnergyUpDown.Value = EnRes.MaxEnergy;
+                EnergyReserveRecoveryUpDown.Value = EnRes.Recovery;
+                EnergyReserveGroupBox.Visible = true;
+                EnergyReserveGroupBox.BringToFront();
             }
             if (p is EnergyBlast)
             {
@@ -94,7 +105,7 @@ namespace Capers
             {
                 int index = CharactersListBox.SelectedIndex;
                 Character c = (Character)CharactersListBox.SelectedItem;
-                c.Name = NameTextBox.Text;
+                c.Name = CharNameTextBox.Text;
                 c.Str = (int)CharStrUpDown.Value;
                 c.Con = (int)CharConUpDown.Value;
                 c.End = (int)CharEndUpDown.Value;
@@ -106,11 +117,22 @@ namespace Capers
                 CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
                 CharactersListBox.SelectedIndex = index;
             }
+            else if (Selected == selectiontype.Energy_Reserve)
+            {
+                int index = PowersListBox.SelectedIndex;
+                EnergyReserve EnRes = (EnergyReserve)PowersListBox.SelectedItem;
+                EnRes.Name = EnergyReserveNameTextBox.Text;
+                EnRes.MaxEnergy = (int)EnergyReserveMaxEnergyUpDown.Value;
+                EnRes.Recovery = (int)EnergyReserveRecoveryUpDown.Value;
+                PowersListBox.DataSource = null;
+                PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
+                PowersListBox.SelectedIndex = index;
+            }
             else
             {
                 int index = PowersListBox.SelectedIndex;
                 Power p = (Power)PowersListBox.SelectedItem;
-                p.Name = NameTextBox.Text;
+                p.Name = CharNameTextBox.Text;
                 PowersListBox.DataSource = null;
                 PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
                 PowersListBox.SelectedIndex = index;
@@ -138,6 +160,33 @@ namespace Capers
             Database.GetActiveDatabase().RemoveCharacter(c);
             CharactersListBox.DataSource = null;
             CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
+        }
+
+        private void DeletePowerButton_Click(object sender, EventArgs e)
+        {
+            if ((CharactersListBox.SelectedIndex < 0) || (PowersListBox.SelectedIndex < 0))
+                return;
+            (CharactersListBox.SelectedItem as Character).removerpower((Power)PowersListBox.SelectedItem);
+            PowersListBox.DataSource = null;
+            PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
+        }
+
+        private void AddPowerButton_Click(object sender, EventArgs e)
+        {
+            if ((string)PowerTypeSelectionComboBox.SelectedItem == string.Empty)
+            {
+                return;
+            }
+            if (CharactersListBox.SelectedIndex < 0)
+                return;
+            if (string.Compare((string)PowerTypeSelectionComboBox.SelectedItem, "Energy Reserve") == 0)
+            {
+                EnergyReserve En = new EnergyReserve();
+                En.Name = "Energy Reserve";
+                (CharactersListBox.SelectedItem as Character).addpower(En);
+            }
+            PowersListBox.DataSource = null;
+            PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
         }
     }
 }

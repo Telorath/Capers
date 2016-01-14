@@ -163,6 +163,19 @@ namespace Capers
     {
         int mEnergy;
         int mMaxEnergy;
+        int mRecovery = 1;
+        int mUsedBy = 0;
+        public int UsedBy
+        {
+            get
+            {
+                return mUsedBy;
+            }
+            set
+            {
+                mUsedBy = value;
+            }
+        }
         public int Energy
         {
             get
@@ -189,6 +202,20 @@ namespace Capers
                 mMaxEnergy = value;
             }
         }
+
+        public int Recovery
+        {
+            get
+            {
+                return mRecovery;
+            }
+
+            set
+            {
+                mRecovery = value;
+            }
+        }
+
         public override void Display()
         {
             Console.WriteLine("Power Name: " + Name);
@@ -196,17 +223,16 @@ namespace Capers
             Console.WriteLine("Energy: " + Energy + "/" + MaxEnergy);
             Console.WriteLine("Point Cost: " + mActiveCost + "(Active)/" + mRealCost + "(real)");
         }
-
         public void TakeRecovery()
         {
             Energy += 1;
         }
         public override void calculatecost()
         {
-            mBaseCost = MaxEnergy;
+            mBaseCost = MaxEnergy / 2 + Recovery * 2;
             mActiveCost = (int)(mBaseCost * (1 + mAdvantageMult));
             mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
-            mEnergyCost = mActiveCost / 10;
+            mEnergyCost = 0;
         }
     }
     [Serializable]

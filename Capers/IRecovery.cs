@@ -8,6 +8,7 @@ namespace Capers
 {
     interface IRecovery
     {
+        int Recovery { get; set; }
         void TakeRecovery();
     }
 }

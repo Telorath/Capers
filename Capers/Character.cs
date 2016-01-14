@@ -18,10 +18,10 @@ namespace Capers
         //Resources
         int mHealth = 10;
         int mMaxHealth = 10;
-        int mStun = 10;
-        int mMaxStun = 10;
-        int mEnergy = 10;
-        int mMaxEnergy = 10;
+        int mStun = 20;
+        int mMaxStun = 20;
+        int mEnergy = 20;
+        int mMaxEnergy = 20;
         //Core stats
         int mStr = 10;
         int mCon = 10;
@@ -35,6 +35,7 @@ namespace Capers
         int mRPDEF = 0;
         int mEDEF = 2;
         int mREDEF = 0;
+        int mRecovery = 2;
         public IDealsDamage DefaultAttack;
         public bool mKO = false;
         public bool mDead = false;
@@ -204,11 +205,13 @@ namespace Capers
 
             set
             {
+                PDEF -= mStr / 5;
+                Recovery -= mStr / 5;
+                MaxStun -= mStr / 2;
                 mStr = value;
-                if (mStr < 0)
-                {
-                    mStr = 0;
-                }
+                PDEF += mStr / 5;
+                Recovery += mStr / 5;
+                MaxStun += mStr / 2;
             }
         }
         public int Con
@@ -244,7 +247,7 @@ namespace Capers
         }
         public int Intel
         {
-get { return mInt; }
+            get { return mInt; }
             set { mInt = value; }
         }
         public int Wil
@@ -259,7 +262,8 @@ get { return mInt; }
         }
         public int PointSpent
         {
-            get {
+            get
+            {
                 int value = 0;
                 value += (Str - 10);
                 value += (Con - 10) * 2;
@@ -274,6 +278,19 @@ get { return mInt; }
                     value += p.PointCost;
                 }
                 return value;
+            }
+        }
+
+        public int Recovery
+        {
+            get
+            {
+                return mRecovery;
+            }
+
+            set
+            {
+                mRecovery = value;
             }
         }
         #endregion
@@ -294,10 +311,31 @@ get { return mInt; }
             {
                 (p as Buff).Apply(this);
             }
+            if (p.EnergySource is EnergyReserve)
+            {
+                (p.EnergySource as EnergyReserve).UsedBy += 1;
+            }
+            if (p is EnergyReserve)
+            {
+                for (int i = 0; i < Powers.Count; i++)
+                {
+                    if (Powers[i].EnergySource == p)
+                    {
+                        (p as EnergyReserve).UsedBy += 1;
+                    }
+                }
+            }
         }
         public void removerpower(Power p)
         {
             Powers.Remove(p);
+            if (p is EnergyReserve)
+            {
+                if ((p as EnergyReserve).UsedBy > 0)
+                {
+                    return;
+                }
+            }
             p.User = null;
             if (p is Buff)
             {
