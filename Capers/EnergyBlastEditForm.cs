@@ -64,12 +64,18 @@ namespace Capers
             EnergySourceComboBox.SelectedIndex = 0;
             name = SelectedEnergyBlast.Name;
             dice = SelectedEnergyBlast.Dice;
-            pointcost = SelectedEnergyBlast.PointCost;
+            pointcost = SelectedEnergyBlast.RealPointCost;
         }
 
         private void DiceNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             pointcost = dice * 10;
+        }
+
+        private void Accept_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

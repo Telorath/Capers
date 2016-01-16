@@ -48,6 +48,7 @@
             this.Accept.TabIndex = 0;
             this.Accept.Text = "Accept";
             this.Accept.UseVisualStyleBackColor = true;
+            this.Accept.Click += new System.EventHandler(this.Accept_Click);
             // 
             // Cancel
             // 

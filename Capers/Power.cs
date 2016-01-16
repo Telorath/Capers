@@ -25,43 +25,136 @@ namespace Capers
         mental,
         arcane
     }
+    public enum ResourceType
+    {
+        none,
+        energy,
+        charges,
+        both
+    }
     [Serializable]
-    public abstract class Power : Entity, IDisplayable
+    public abstract class Power : Entity, IDisplayable, ICharges
     {
         protected int mBaseCost;
         protected int mRealCost;
         protected int mActiveCost;
         protected int mEnergyCost;
+        protected int mChargesused;
+        protected int mCharges;
+        protected int mMaxCharges;
         public float mAdvantageMult;
         public float mDisadvantageMult;
         public IEnergy EnergySource;
+        public ICharges ChargeSource;
         public Entity User;
+        public ResourceType mResourceType = ResourceType.energy;
+        public int Charges
+        {
+            get
+            {
+                if (ChargeSource == null)
+                {
+                    return mCharges;
+                }
+                return ChargeSource.Charges;
+            }
+
+            set
+            {
+                if (ChargeSource == null)
+                {
+                    mCharges = value;
+                }
+            }
+        }
+        public int MaxCharges
+        {
+            get
+            {
+                if (ChargeSource == null)
+                {
+                    return mMaxCharges;
+                }
+                return ChargeSource.MaxCharges;
+            }
+
+            set
+            {
+                if (ChargeSource == null)
+                {
+                    mMaxCharges = value;
+                }
+                ChargeSource.MaxCharges = value;
+            }
+        }
         public virtual void Display()
         {
         }
         public bool CanUse()
         {
-            if (this is IEnergy)
+            if (this is IEnergy || mResourceType == ResourceType.none)
             {
                 return true;
             }
-            if (EnergySource.Energy >= mEnergyCost)
+            switch (mResourceType)
             {
-                return true;
+                case ResourceType.energy:
+                    if (EnergySource.Energy >= mEnergyCost)
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                case ResourceType.charges:
+                    if (Charges >= mChargesused)
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                case ResourceType.both:
+                                        if (EnergySource.Energy >= mEnergyCost && Charges >= mChargesused)
+                    {
+                        return true;
+                    }
+                    else { return false; }
             }
-            else { return false; }
+            return false;
         }
         protected void DrawEnergy()
         {
-            EnergySource.Energy -= mEnergyCost;
+            if (mResourceType == ResourceType.energy || mResourceType == ResourceType.both)
+                EnergySource.Energy -= mEnergyCost;
+            if (mResourceType == ResourceType.charges || mResourceType == ResourceType.both)
+                Charges -= mChargesused;
         }
         public virtual void calculatecost()
         {
             //Exists to be overridden.
         }
-        public int PointCost
+        public int ActivePointCost
         {
-           get { return mRealCost; }
+            get { return mActiveCost; }
+        }
+        public int RealPointCost
+        {
+            get { return mRealCost; }
+        }
+    }
+    [Serializable]
+    public class Multipower : Power
+    {
+        public List<Power> Powers = new List<Power>();
+        public override void calculatecost()
+        {
+            int highest = 0;
+            int total = 0;
+            foreach (Power p in Powers)
+            {
+                p.calculatecost();
+                if (p.RealPointCost > highest)
+                    highest = p.RealPointCost;
+                total += p.RealPointCost;
+            }
+            mRealCost = highest + (total / 10);
         }
     }
     [Serializable]
@@ -76,7 +169,7 @@ namespace Capers
             //Exists to be overrriden
         }
     }
-[Serializable]
+    [Serializable]
     public class EnergyBlast : Power, IDealsDamage
     {
         int mDice = 1;
@@ -304,7 +397,7 @@ namespace Capers
         }
     }
     [Serializable]
-   public class KillingAttack : Power, IDealsDamage
+    public class KillingAttack : Power, IDealsDamage
     {
         public int Dice;
         private int StunMult = 5;
@@ -427,7 +520,7 @@ namespace Capers
             mRealCost = (int)(mActiveCost / (1 + mDisadvantageMult));
             mEnergyCost = 0;
         }
-    } 
+    }
     public struct HitStruct
     {
         private int mHealthDamage;

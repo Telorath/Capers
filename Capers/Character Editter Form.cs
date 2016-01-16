@@ -38,6 +38,7 @@ namespace Capers
         {
             if (CharactersListBox.SelectedIndex < 0)
             {
+                SelectedCharacter = null;
                 return;
             }
             SelectedCharacter = (Character)CharactersListBox.Items[CharactersListBox.SelectedIndex];
@@ -51,6 +52,18 @@ namespace Capers
             CharIntUpDown.Value = SelectedCharacter.Intel;
             CharWilUpDown.Value = SelectedCharacter.Wil;
             CharChaUpDown.Value = SelectedCharacter.Cha;
+            CharCalcpoints();
+            SelectedType = selectiontype.Character;
+            CharacterGroupBox.Visible = true;
+            EnergyReserveGroupBox.Visible = false;
+            ArmorGroupBox.Visible = false;
+        }
+        void CharCalcpoints()
+        {
+            if (SelectedCharacter == null)
+            {
+                return;
+            }
             int points = SelectedCharacter.PointSpent;
             PointsLabel.Text = points.ToString();
             CharacterTierLabel.Text = "Tier: Normal";
@@ -58,8 +71,10 @@ namespace Capers
                 CharacterTierLabel.Text = "Tier: Notable Normal";
             if (points > 50)
                 CharacterTierLabel.Text = "Tier: Skilled Normal";
-            if (points > 100)
+            if (points > 75)
                 CharacterTierLabel.Text = "Tier: Badass Normal";
+            if (points > 100)
+                CharacterTierLabel.Text = "Tier: Heroic Normal";
             if (points > 150)
                 CharacterTierLabel.Text = "Tier: Low-power Super";
             if (points > 200)
@@ -68,10 +83,6 @@ namespace Capers
                 CharacterTierLabel.Text = "Tier: High-power Super";
             if (points > 500)
                 CharacterTierLabel.Text = "Tier: Cosmically Powerful Super";
-            SelectedType = selectiontype.Character;
-            CharacterGroupBox.Visible = true;
-            EnergyReserveGroupBox.Visible = false;
-            ArmorGroupBox.Visible = false;
         }
         private void PowersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -80,6 +91,7 @@ namespace Capers
             ArmorGroupBox.Visible = false;
             if (PowersListBox.SelectedIndex < 0)
             {
+                SelectedPower = null;
                 return;
             }
             SelectedPower = (Power)PowersListBox.Items[PowersListBox.SelectedIndex];
@@ -89,7 +101,7 @@ namespace Capers
                 SelectedType = selectiontype.Energy_Reserve;
                 EnergyReserve EnRes = (EnergyReserve)SelectedPower;
                 EnRes.calculatecost();
-                EnergyReservePointCostLabel.Text = "Cost: " + EnRes.PointCost;
+                EnergyReservePointCostLabel.Text = "Cost: " + EnRes.RealPointCost;
                 EnergyReserveNameTextBox.Text = EnRes.Name;
                 EnergyReserveMaxEnergyUpDown.Value = EnRes.MaxEnergy;
                 EnergyReserveRecoveryUpDown.Value = EnRes.Recovery;
@@ -105,7 +117,7 @@ namespace Capers
                 SelectedType = selectiontype.Armor;
                 Armor Arm = (Armor)SelectedPower;
                 Arm.calculatecost();
-                ArmorPointCostLabel.Text = "Cost: " + Arm.PointCost;
+                ArmorPointCostLabel.Text = "Cost: " + Arm.RealPointCost;
                 ArmorNameTextBox.Text = Arm.Name;
                 ArmorRPDefUpDown.Value = Arm.RPDEF;
                 ArmorREDefUpDown.Value = Arm.REDEF;
@@ -235,8 +247,18 @@ namespace Capers
             {
                 EnergyBlast En = (EnergyBlast)SelectedPower;
                 EnergyBlastEditForm EditForm = new EnergyBlastEditForm(SelectedCharacter,En);
-                EditForm.ShowDialog();
+                if (EditForm.ShowDialog() == DialogResult.OK)
+                {
+                    En.Name = EditForm.name;
+                    En.Dice = EditForm.dice;
+                    En.EnergySource = EditForm.energysource;
+                    En.calculatecost();
+                    CharCalcpoints();
+                }
+                EditForm.Dispose();
             }
+            PowersListBox.DataSource = null;
+            PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
         }
     }
 }

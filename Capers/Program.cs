@@ -14,25 +14,35 @@ namespace Capers
         public static Random prng = new Random();
         static void Main(string[] args)
         {
-#if false
-            Character Bob = new Character();
-            Bob.Name = "Bob";
-            Power ERESERVE = new EnergyReserve();
-            (ERESERVE as EnergyReserve).MaxEnergy = 100;
-            (ERESERVE as EnergyReserve).Energy = 100;
-            Bob.addpower(ERESERVE);
-            Power EBLAST1 = new EnergyBlast();
-            (EBLAST1 as EnergyBlast).Dice = 2;
-            EBLAST1.EnergySource = (EnergyReserve)ERESERVE;
-            Power EBLAST2 = new EnergyBlast();
-            (EBLAST2 as EnergyBlast).Dice = 1;
-            EBLAST2.EnergySource = (EnergyReserve)ERESERVE;
-            EBLAST1.calculatecost();
-            EBLAST2.calculatecost();
-            Bob.addpower(EBLAST1);
-            Bob.addpower(EBLAST2);
-            Database.GetActiveDatabase().AddCharacter(Bob);
-            Database.GetActiveDatabase().Save();
+#if true
+            Multipower MentalistTricks = new Multipower();
+            MentalistTricks.EnergySource = new EnergyReserve();
+            MentalistTricks.EnergySource.MaxEnergy = 100;
+            MentalistTricks.EnergySource.Energy = 100;
+            MentalistTricks.Name = "Mentalist Tricks";
+            EnergyBlast EnBlast = new EnergyBlast();
+            EnBlast.EnergySource = MentalistTricks.EnergySource;
+            EnBlast.Dice = 2;
+            EnBlast.Name = "Psi Blast";
+            EnergyBlast EffBolt = new EnergyBlast();
+            EffBolt.EnergySource = MentalistTricks.EnergySource;
+            EffBolt.Dice = 8;
+            EffBolt.Name = "EFF BOLT";
+            EnergyBlast OmegaCannon = new EnergyBlast();
+            OmegaCannon.Name = "Omega Cannon";
+            OmegaCannon.Dice = 15;
+            OmegaCannon.EnergySource = MentalistTricks.EnergySource;
+            MentalistTricks.Powers.Add(EnBlast);
+            MentalistTricks.Powers.Add(EffBolt);
+            MentalistTricks.Powers.Add(OmegaCannon);
+            MentalistTricks.calculatecost();
+            foreach (Power p in MentalistTricks.Powers)
+            {
+                Console.WriteLine("--------------------------------------------------");
+                p.Display();
+            }
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("Point Cost: " + MentalistTricks.RealPointCost);
 #endif
 #if false
             Database Active = Database.GetActiveDatabase();
@@ -46,13 +56,13 @@ namespace Capers
             Active.Save();
 
 #endif
-#if true
+#if false
             Database.LoadDatabase();
             Database.GetActiveDatabase().ReadCharacters();
-#endif
             Character_Editter_Form CHARFORM = new Character_Editter_Form();
             Application.Run(CHARFORM);
             Event();
+#endif
             Console.ReadLine();
         }
         static void Event()
@@ -66,14 +76,17 @@ namespace Capers
             {
                 if (CHARDATABASE[i].SPD == 0) { CHARDATABASE[i].SPD = 2; }
             }
-            int var = 0;
-            while (var == 0)
-            {
-                var = prng.Next(0, CHARDATABASE.Count);
-            }
-            Character Other = CHARDATABASE[var];
             Character First = CHARDATABASE[prng.Next(0, CHARDATABASE.Count)];
-            var = prng.Next(1, 101);
+            Character Other;
+            while (true)
+            {
+                Other = CHARDATABASE[prng.Next(0, CHARDATABASE.Count)];
+                if (Other != First)
+                {
+                    break;
+                }
+            }
+            int var = prng.Next(1, 101);
             if (var < 1)
             {
                 Console.WriteLine("You meet up with " + Other.Name + " and some stuff happens. Nobody kills each other though!");
@@ -90,19 +103,30 @@ namespace Capers
         {
             bool Combat = true;
             int turn = 1;
+            bool turntaken = false;
             while (Combat)
             {
                 if (turn % 13 + 1 <= Combatant1.SPD)
+                {
+                    turntaken = true;
                     AttackRound(Combatant1, Combatant2);
+                }
                 if (turn % 13 + 1 <= Combatant2.SPD)
+                {
+                    turntaken = true;
                     AttackRound(Combatant2, Combatant1);
+                }
                 if (turn % 12 == 0)
                 {
                     Combatant1.TakeRecovery();
                     Combatant2.TakeRecovery();
                 }
-                Combatant1.Display();
-                Combatant2.Display();
+                if (turntaken)
+                {
+                    Combatant1.Display();
+                    Combatant2.Display();
+                    turntaken = false;
+                }
                 if (Combatant1.KO || Combatant1.Dead || Combatant2.Dead || Combatant2.KO)
                 {
                     Combat = false;

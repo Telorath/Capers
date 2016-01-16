@@ -60,6 +60,8 @@
       <DependentUpon>EnergyBlastEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Focus.cs" />
+    <Compile Include="ICharges.cs" />
     <Compile Include="IDealsDamage.cs" />
     <Compile Include="IDisplayable.cs" />
     <Compile Include="IEnergy.cs" />

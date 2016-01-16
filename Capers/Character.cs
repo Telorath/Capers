@@ -15,6 +15,7 @@ namespace Capers
     public class Character : Entity, IEnergy, IHealth, IStun, IRecovery
     {
         public List<Power> Powers = new List<Power>();
+        public List<Focus> Foci;
         //Resources
         int mHealth = 10;
         int mMaxHealth = 10;
@@ -296,7 +297,7 @@ namespace Capers
                 foreach (Power p in Powers)
                 {
                     p.calculatecost();
-                    value += p.PointCost;
+                    value += p.RealPointCost;
                 }
                 return value;
             }
