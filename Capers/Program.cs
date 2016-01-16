@@ -72,6 +72,7 @@ namespace Capers
                 var = prng.Next(0, CHARDATABASE.Count);
             }
             Character Other = CHARDATABASE[var];
+            Character First = CHARDATABASE[prng.Next(0, CHARDATABASE.Count)];
             var = prng.Next(1, 101);
             if (var < 1)
             {
@@ -80,9 +81,9 @@ namespace Capers
             else
             {
                 Console.WriteLine("You run into " + Other.Name + " out on the street and a fight breaks out between you!");
-                CHARDATABASE[0].FullHeal();
+                First.FullHeal();
                 Other.FullHeal();
-                MockBattle(CHARDATABASE[0], Other);
+                MockBattle(First, Other);
             }
         }
         static void MockBattle(Character Combatant1, Character Combatant2)

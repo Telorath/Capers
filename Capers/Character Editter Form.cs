@@ -222,6 +222,7 @@ namespace Capers
             {
                 EnergyBlast En = new EnergyBlast();
                 En.Name = "Energy Blast";
+                En.EnergySource = SelectedCharacter;
                 (CharactersListBox.SelectedItem as Character).addpower(En);
             }
             PowersListBox.DataSource = null;
