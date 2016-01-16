@@ -52,24 +52,57 @@ namespace Capers
 #endif
             Character_Editter_Form CHARFORM = new Character_Editter_Form();
             Application.Run(CHARFORM);
+            Event();
             Console.ReadLine();
         }
-        static void MockBattle(Character Bob, Character Darkness)
+        static void Event()
+        {
+            List<Character> CHARDATABASE = Database.GetActiveDatabase().CharList();
+            if (CHARDATABASE.Count < 2)
+            {
+                return;
+            }
+            for (int i = 0; i < CHARDATABASE.Count; i++)
+            {
+                if (CHARDATABASE[i].SPD == 0) { CHARDATABASE[i].SPD = 2; }
+            }
+            int var = 0;
+            while (var == 0)
+            {
+                var = prng.Next(0, CHARDATABASE.Count);
+            }
+            Character Other = CHARDATABASE[var];
+            var = prng.Next(1, 101);
+            if (var < 1)
+            {
+                Console.WriteLine("You meet up with " + Other.Name + " and some stuff happens. Nobody kills each other though!");
+            }
+            else
+            {
+                Console.WriteLine("You run into " + Other.Name + " out on the street and a fight breaks out between you!");
+                CHARDATABASE[0].FullHeal();
+                Other.FullHeal();
+                MockBattle(CHARDATABASE[0], Other);
+            }
+        }
+        static void MockBattle(Character Combatant1, Character Combatant2)
         {
             bool Combat = true;
             int turn = 1;
             while (Combat)
             {
-                AttackRound(Bob, Darkness);
-                AttackRound(Darkness, Bob);
+                if (turn % 13 + 1 <= Combatant1.SPD)
+                    AttackRound(Combatant1, Combatant2);
+                if (turn % 13 + 1 <= Combatant2.SPD)
+                    AttackRound(Combatant2, Combatant1);
                 if (turn % 12 == 0)
                 {
-                    Bob.TakeRecovery();
-                    Darkness.TakeRecovery();
+                    Combatant1.TakeRecovery();
+                    Combatant2.TakeRecovery();
                 }
-                Bob.Display();
-                Darkness.Display();
-                if (Bob.KO || Bob.Dead || Darkness.Dead || Darkness.KO)
+                Combatant1.Display();
+                Combatant2.Display();
+                if (Combatant1.KO || Combatant1.Dead || Combatant2.Dead || Combatant2.KO)
                 {
                     Combat = false;
                 }
@@ -91,9 +124,16 @@ namespace Capers
             if (Attack != null && (Attack as Power).CanUse())
             {
                 Hit = Attack.GetDamage();
-                Hit = Defender.ApplyDefense(Hit);
-                Console.WriteLine(Attacker + " attacks " + Defender + " with " + Attack + " dealing " + Hit.HealthDamage + "(" + Hit.StunDamage + " Stun) damage!");
-                Defender.GetHit(Hit);
+                if (Attacker.Attackroll(Defender))
+                {
+                    Hit = Defender.ApplyDefense(Hit);
+                    Console.WriteLine(Attacker + " attacks " + Defender + " with " + Attack + " dealing " + Hit.HealthDamage + "(" + Hit.StunDamage + " Stun) damage!");
+                    Defender.GetHit(Hit);
+                }
+                else
+                {
+                    Console.WriteLine(Attacker + " attacks " + Defender + " with " + Attack + ", but misses!");
+                }
             }
             else
             {
@@ -117,7 +157,7 @@ namespace Capers
             Character C = new Character();
             IEnergy ERESERVE = C;
             C.Name = name;
-            int chance = prng.Next(1,101);
+            int chance = prng.Next(1, 101);
             if (chance > 30)
             {
                 ERESERVE = new EnergyReserve();

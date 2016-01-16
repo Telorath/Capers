@@ -36,6 +36,7 @@ namespace Capers
         int mEDEF = 2;
         int mREDEF = 0;
         int mRecovery = 2;
+        int mSPD = 2;
         public IDealsDamage DefaultAttack;
         public bool mKO = false;
         public bool mDead = false;
@@ -53,7 +54,7 @@ namespace Capers
                 {
                     mHealth = mMaxHealth;
                 }
-                if (mHealth < 0)
+                if (mHealth <= 0)
                 {
                     mDead = true;
                 }
@@ -115,7 +116,7 @@ namespace Capers
                 {
                     mStun = mMaxStun;
                 }
-                if (mStun < 0)
+                if (mStun <= 0)
                 {
                     mKO = true;
                 }
@@ -142,9 +143,6 @@ namespace Capers
         {
             get { return mDead; }
         }
-
-
-
         public int PDEF
         {
             get
@@ -212,6 +210,10 @@ namespace Capers
                 PDEF += mStr / 5;
                 Recovery += mStr / 5;
                 MaxStun += mStr / 2;
+                if (mStr < 0)
+                {
+                    Str = 0;
+                }
             }
         }
         public int Con
@@ -222,17 +224,36 @@ namespace Capers
             }
             set
             {
+                MaxHealth -= mCon;
+                MaxStun -= mCon;
                 mCon = value;
+                MaxHealth += mCon;
+                MaxStun += mCon;
                 if (mCon < 0)
                 {
-                    mCon = 0;
+                    Con = 0;
                 }
             }
         }
         public int End
         {
             get { return mEnd; }
-            set { mEnd = value; }
+            set
+            {
+                EDEF -= mEnd / 5;
+                Recovery -= mEnd / 5;
+                MaxEnergy -= mEnd * 2;
+                MaxStun -= mEnd / 2;
+                mEnd = value;
+                EDEF += mEnd / 5;
+                Recovery += mEnd / 5;
+                MaxEnergy += mEnd * 2;
+                MaxStun += mEnd / 2;
+                if (mEnd < 0)
+                {
+                    End = 0;
+                }
+            }
         }
         public int Agi
         {
@@ -291,6 +312,19 @@ namespace Capers
             set
             {
                 mRecovery = value;
+            }
+        }
+
+        public int SPD
+        {
+            get
+            {
+                return mSPD;
+            }
+
+            set
+            {
+                mSPD = value;
             }
         }
         #endregion
@@ -354,6 +388,7 @@ namespace Capers
             Console.WriteLine("Health: " + Health + "/" + MaxHealth);
             Console.WriteLine("Stun: " + Stun + "/" + MaxStun);
             Console.WriteLine("Energy: " + Energy + "/" + MaxEnergy);
+            Console.WriteLine("Str Damage: " + (Str / 10) + "d6");
         }
         public void PowersDisplay()
         {
@@ -425,6 +460,17 @@ namespace Capers
             Stun = MaxStun;
             mDead = false;
             mKO = false;
+        }
+        public bool Attackroll(Character Other)
+        {
+            int Attackroll = Program.prng.Next((this.mAgi / 10), this.mAgi + 1);
+            int Defenseroll = Program.prng.Next((Other.mAgi / 10), Other.mAgi + 1);
+            if (Attackroll >= Defenseroll)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         static public Character Load(string path)
         {

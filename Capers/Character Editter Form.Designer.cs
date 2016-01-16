@@ -31,14 +31,6 @@
             this.CharactersListBox = new System.Windows.Forms.ListBox();
             this.PowersListBox = new System.Windows.Forms.ListBox();
             this.CharacterGroupBox = new System.Windows.Forms.GroupBox();
-            this.EnergyReserveGroupBox = new System.Windows.Forms.GroupBox();
-            this.EnergyReservePointCostLabel = new System.Windows.Forms.Label();
-            this.EnergyReserveRecoveryUpDown = new System.Windows.Forms.NumericUpDown();
-            this.EnergyReserveRecoveryLabel = new System.Windows.Forms.Label();
-            this.EnergyReserveMaxEnergyUpDown = new System.Windows.Forms.NumericUpDown();
-            this.EnergyReserveMaxEnergyLabel = new System.Windows.Forms.Label();
-            this.EnergyReserveNameTextBox = new System.Windows.Forms.TextBox();
-            this.EnergyReserveNameLabel = new System.Windows.Forms.Label();
             this.CharacterTierLabel = new System.Windows.Forms.Label();
             this.PointsLabel = new System.Windows.Forms.Label();
             this.CharChaLabel = new System.Windows.Forms.Label();
@@ -58,17 +50,32 @@
             this.ApplyCharacterButton = new System.Windows.Forms.Button();
             this.CharNameLabel = new System.Windows.Forms.Label();
             this.CharNameTextBox = new System.Windows.Forms.TextBox();
+            this.EnergyReserveGroupBox = new System.Windows.Forms.GroupBox();
+            this.ApplyEnergyReserveButton = new System.Windows.Forms.Button();
+            this.EnergyReservePointCostLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveRecoveryUpDown = new System.Windows.Forms.NumericUpDown();
+            this.EnergyReserveRecoveryLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveMaxEnergyUpDown = new System.Windows.Forms.NumericUpDown();
+            this.EnergyReserveMaxEnergyLabel = new System.Windows.Forms.Label();
+            this.EnergyReserveNameTextBox = new System.Windows.Forms.TextBox();
+            this.EnergyReserveNameLabel = new System.Windows.Forms.Label();
+            this.ArmorGroupBox = new System.Windows.Forms.GroupBox();
+            this.ArmorApplyButton = new System.Windows.Forms.Button();
+            this.ArmorPointCostLabel = new System.Windows.Forms.Label();
+            this.ArmorREDefUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ARMORREDEFLABEL = new System.Windows.Forms.Label();
+            this.ArmorRPDefUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ArmorRPDEFLabel = new System.Windows.Forms.Label();
+            this.ArmorNameTextBox = new System.Windows.Forms.TextBox();
+            this.ArmorNameLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.AddCharButton = new System.Windows.Forms.Button();
             this.DeleteCharButton = new System.Windows.Forms.Button();
             this.AddPowerButton = new System.Windows.Forms.Button();
             this.DeletePowerButton = new System.Windows.Forms.Button();
             this.PowerTypeSelectionComboBox = new System.Windows.Forms.ComboBox();
-            this.ApplyEnergyReserveButton = new System.Windows.Forms.Button();
+            this.EditPowerButton = new System.Windows.Forms.Button();
             this.CharacterGroupBox.SuspendLayout();
-            this.EnergyReserveGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).BeginInit();
@@ -76,6 +83,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.CharConUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharAgiUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharStrUpDown)).BeginInit();
+            this.EnergyReserveGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).BeginInit();
+            this.ArmorGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ArmorREDefUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArmorRPDefUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // CharactersListBox
@@ -122,79 +135,6 @@
             this.CharacterGroupBox.Size = new System.Drawing.Size(740, 521);
             this.CharacterGroupBox.TabIndex = 2;
             this.CharacterGroupBox.TabStop = false;
-            // 
-            // EnergyReserveGroupBox
-            // 
-            this.EnergyReserveGroupBox.Controls.Add(this.ApplyEnergyReserveButton);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReservePointCostLabel);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryUpDown);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryLabel);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyUpDown);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyLabel);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameTextBox);
-            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameLabel);
-            this.EnergyReserveGroupBox.Location = new System.Drawing.Point(279, 6);
-            this.EnergyReserveGroupBox.Name = "EnergyReserveGroupBox";
-            this.EnergyReserveGroupBox.Size = new System.Drawing.Size(740, 521);
-            this.EnergyReserveGroupBox.TabIndex = 8;
-            this.EnergyReserveGroupBox.TabStop = false;
-            // 
-            // EnergyReservePointCostLabel
-            // 
-            this.EnergyReservePointCostLabel.AutoSize = true;
-            this.EnergyReservePointCostLabel.Location = new System.Drawing.Point(27, 492);
-            this.EnergyReservePointCostLabel.Name = "EnergyReservePointCostLabel";
-            this.EnergyReservePointCostLabel.Size = new System.Drawing.Size(58, 13);
-            this.EnergyReservePointCostLabel.TabIndex = 6;
-            this.EnergyReservePointCostLabel.Text = "Point Cost:";
-            // 
-            // EnergyReserveRecoveryUpDown
-            // 
-            this.EnergyReserveRecoveryUpDown.Location = new System.Drawing.Point(74, 97);
-            this.EnergyReserveRecoveryUpDown.Name = "EnergyReserveRecoveryUpDown";
-            this.EnergyReserveRecoveryUpDown.Size = new System.Drawing.Size(643, 20);
-            this.EnergyReserveRecoveryUpDown.TabIndex = 5;
-            // 
-            // EnergyReserveRecoveryLabel
-            // 
-            this.EnergyReserveRecoveryLabel.AutoSize = true;
-            this.EnergyReserveRecoveryLabel.Location = new System.Drawing.Point(6, 97);
-            this.EnergyReserveRecoveryLabel.Name = "EnergyReserveRecoveryLabel";
-            this.EnergyReserveRecoveryLabel.Size = new System.Drawing.Size(56, 13);
-            this.EnergyReserveRecoveryLabel.TabIndex = 4;
-            this.EnergyReserveRecoveryLabel.Text = "Recovery:";
-            // 
-            // EnergyReserveMaxEnergyUpDown
-            // 
-            this.EnergyReserveMaxEnergyUpDown.Location = new System.Drawing.Point(74, 58);
-            this.EnergyReserveMaxEnergyUpDown.Name = "EnergyReserveMaxEnergyUpDown";
-            this.EnergyReserveMaxEnergyUpDown.Size = new System.Drawing.Size(643, 20);
-            this.EnergyReserveMaxEnergyUpDown.TabIndex = 3;
-            // 
-            // EnergyReserveMaxEnergyLabel
-            // 
-            this.EnergyReserveMaxEnergyLabel.AutoSize = true;
-            this.EnergyReserveMaxEnergyLabel.Location = new System.Drawing.Point(6, 60);
-            this.EnergyReserveMaxEnergyLabel.Name = "EnergyReserveMaxEnergyLabel";
-            this.EnergyReserveMaxEnergyLabel.Size = new System.Drawing.Size(66, 13);
-            this.EnergyReserveMaxEnergyLabel.TabIndex = 2;
-            this.EnergyReserveMaxEnergyLabel.Text = "Max Energy:";
-            // 
-            // EnergyReserveNameTextBox
-            // 
-            this.EnergyReserveNameTextBox.Location = new System.Drawing.Point(74, 19);
-            this.EnergyReserveNameTextBox.Name = "EnergyReserveNameTextBox";
-            this.EnergyReserveNameTextBox.Size = new System.Drawing.Size(643, 20);
-            this.EnergyReserveNameTextBox.TabIndex = 1;
-            // 
-            // EnergyReserveNameLabel
-            // 
-            this.EnergyReserveNameLabel.AutoSize = true;
-            this.EnergyReserveNameLabel.Location = new System.Drawing.Point(6, 19);
-            this.EnergyReserveNameLabel.Name = "EnergyReserveNameLabel";
-            this.EnergyReserveNameLabel.Size = new System.Drawing.Size(41, 13);
-            this.EnergyReserveNameLabel.TabIndex = 0;
-            this.EnergyReserveNameLabel.Text = "Name: ";
             // 
             // CharacterTierLabel
             // 
@@ -352,6 +292,172 @@
             this.CharNameTextBox.Size = new System.Drawing.Size(592, 20);
             this.CharNameTextBox.TabIndex = 0;
             // 
+            // EnergyReserveGroupBox
+            // 
+            this.EnergyReserveGroupBox.Controls.Add(this.ApplyEnergyReserveButton);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReservePointCostLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryUpDown);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveRecoveryLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyUpDown);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveMaxEnergyLabel);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameTextBox);
+            this.EnergyReserveGroupBox.Controls.Add(this.EnergyReserveNameLabel);
+            this.EnergyReserveGroupBox.Location = new System.Drawing.Point(279, 6);
+            this.EnergyReserveGroupBox.Name = "EnergyReserveGroupBox";
+            this.EnergyReserveGroupBox.Size = new System.Drawing.Size(740, 521);
+            this.EnergyReserveGroupBox.TabIndex = 8;
+            this.EnergyReserveGroupBox.TabStop = false;
+            // 
+            // ApplyEnergyReserveButton
+            // 
+            this.ApplyEnergyReserveButton.Location = new System.Drawing.Point(642, 487);
+            this.ApplyEnergyReserveButton.Name = "ApplyEnergyReserveButton";
+            this.ApplyEnergyReserveButton.Size = new System.Drawing.Size(75, 23);
+            this.ApplyEnergyReserveButton.TabIndex = 7;
+            this.ApplyEnergyReserveButton.Text = "Apply";
+            this.ApplyEnergyReserveButton.UseVisualStyleBackColor = true;
+            this.ApplyEnergyReserveButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            // 
+            // EnergyReservePointCostLabel
+            // 
+            this.EnergyReservePointCostLabel.AutoSize = true;
+            this.EnergyReservePointCostLabel.Location = new System.Drawing.Point(27, 492);
+            this.EnergyReservePointCostLabel.Name = "EnergyReservePointCostLabel";
+            this.EnergyReservePointCostLabel.Size = new System.Drawing.Size(58, 13);
+            this.EnergyReservePointCostLabel.TabIndex = 6;
+            this.EnergyReservePointCostLabel.Text = "Point Cost:";
+            // 
+            // EnergyReserveRecoveryUpDown
+            // 
+            this.EnergyReserveRecoveryUpDown.Location = new System.Drawing.Point(74, 97);
+            this.EnergyReserveRecoveryUpDown.Name = "EnergyReserveRecoveryUpDown";
+            this.EnergyReserveRecoveryUpDown.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveRecoveryUpDown.TabIndex = 5;
+            // 
+            // EnergyReserveRecoveryLabel
+            // 
+            this.EnergyReserveRecoveryLabel.AutoSize = true;
+            this.EnergyReserveRecoveryLabel.Location = new System.Drawing.Point(6, 97);
+            this.EnergyReserveRecoveryLabel.Name = "EnergyReserveRecoveryLabel";
+            this.EnergyReserveRecoveryLabel.Size = new System.Drawing.Size(56, 13);
+            this.EnergyReserveRecoveryLabel.TabIndex = 4;
+            this.EnergyReserveRecoveryLabel.Text = "Recovery:";
+            // 
+            // EnergyReserveMaxEnergyUpDown
+            // 
+            this.EnergyReserveMaxEnergyUpDown.Location = new System.Drawing.Point(74, 58);
+            this.EnergyReserveMaxEnergyUpDown.Name = "EnergyReserveMaxEnergyUpDown";
+            this.EnergyReserveMaxEnergyUpDown.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveMaxEnergyUpDown.TabIndex = 3;
+            // 
+            // EnergyReserveMaxEnergyLabel
+            // 
+            this.EnergyReserveMaxEnergyLabel.AutoSize = true;
+            this.EnergyReserveMaxEnergyLabel.Location = new System.Drawing.Point(6, 60);
+            this.EnergyReserveMaxEnergyLabel.Name = "EnergyReserveMaxEnergyLabel";
+            this.EnergyReserveMaxEnergyLabel.Size = new System.Drawing.Size(66, 13);
+            this.EnergyReserveMaxEnergyLabel.TabIndex = 2;
+            this.EnergyReserveMaxEnergyLabel.Text = "Max Energy:";
+            // 
+            // EnergyReserveNameTextBox
+            // 
+            this.EnergyReserveNameTextBox.Location = new System.Drawing.Point(74, 19);
+            this.EnergyReserveNameTextBox.Name = "EnergyReserveNameTextBox";
+            this.EnergyReserveNameTextBox.Size = new System.Drawing.Size(643, 20);
+            this.EnergyReserveNameTextBox.TabIndex = 1;
+            // 
+            // EnergyReserveNameLabel
+            // 
+            this.EnergyReserveNameLabel.AutoSize = true;
+            this.EnergyReserveNameLabel.Location = new System.Drawing.Point(6, 19);
+            this.EnergyReserveNameLabel.Name = "EnergyReserveNameLabel";
+            this.EnergyReserveNameLabel.Size = new System.Drawing.Size(41, 13);
+            this.EnergyReserveNameLabel.TabIndex = 0;
+            this.EnergyReserveNameLabel.Text = "Name: ";
+            // 
+            // ArmorGroupBox
+            // 
+            this.ArmorGroupBox.Controls.Add(this.ArmorApplyButton);
+            this.ArmorGroupBox.Controls.Add(this.ArmorPointCostLabel);
+            this.ArmorGroupBox.Controls.Add(this.ArmorREDefUpDown);
+            this.ArmorGroupBox.Controls.Add(this.ARMORREDEFLABEL);
+            this.ArmorGroupBox.Controls.Add(this.ArmorRPDefUpDown);
+            this.ArmorGroupBox.Controls.Add(this.ArmorRPDEFLabel);
+            this.ArmorGroupBox.Controls.Add(this.ArmorNameTextBox);
+            this.ArmorGroupBox.Controls.Add(this.ArmorNameLabel);
+            this.ArmorGroupBox.Location = new System.Drawing.Point(279, 0);
+            this.ArmorGroupBox.Name = "ArmorGroupBox";
+            this.ArmorGroupBox.Size = new System.Drawing.Size(740, 521);
+            this.ArmorGroupBox.TabIndex = 9;
+            this.ArmorGroupBox.TabStop = false;
+            // 
+            // ArmorApplyButton
+            // 
+            this.ArmorApplyButton.Location = new System.Drawing.Point(642, 474);
+            this.ArmorApplyButton.Name = "ArmorApplyButton";
+            this.ArmorApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.ArmorApplyButton.TabIndex = 7;
+            this.ArmorApplyButton.Text = "Apply";
+            this.ArmorApplyButton.UseVisualStyleBackColor = true;
+            this.ArmorApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            // 
+            // ArmorPointCostLabel
+            // 
+            this.ArmorPointCostLabel.AutoSize = true;
+            this.ArmorPointCostLabel.Location = new System.Drawing.Point(27, 479);
+            this.ArmorPointCostLabel.Name = "ArmorPointCostLabel";
+            this.ArmorPointCostLabel.Size = new System.Drawing.Size(58, 13);
+            this.ArmorPointCostLabel.TabIndex = 6;
+            this.ArmorPointCostLabel.Text = "Point Cost:";
+            // 
+            // ArmorREDefUpDown
+            // 
+            this.ArmorREDefUpDown.Location = new System.Drawing.Point(74, 97);
+            this.ArmorREDefUpDown.Name = "ArmorREDefUpDown";
+            this.ArmorREDefUpDown.Size = new System.Drawing.Size(643, 20);
+            this.ArmorREDefUpDown.TabIndex = 5;
+            // 
+            // ARMORREDEFLABEL
+            // 
+            this.ARMORREDEFLABEL.AutoSize = true;
+            this.ARMORREDEFLABEL.Location = new System.Drawing.Point(6, 97);
+            this.ARMORREDEFLABEL.Name = "ARMORREDEFLABEL";
+            this.ARMORREDEFLABEL.Size = new System.Drawing.Size(46, 13);
+            this.ARMORREDEFLABEL.TabIndex = 4;
+            this.ARMORREDEFLABEL.Text = "REDEF:";
+            // 
+            // ArmorRPDefUpDown
+            // 
+            this.ArmorRPDefUpDown.Location = new System.Drawing.Point(74, 58);
+            this.ArmorRPDefUpDown.Name = "ArmorRPDefUpDown";
+            this.ArmorRPDefUpDown.Size = new System.Drawing.Size(643, 20);
+            this.ArmorRPDefUpDown.TabIndex = 3;
+            // 
+            // ArmorRPDEFLabel
+            // 
+            this.ArmorRPDEFLabel.AutoSize = true;
+            this.ArmorRPDEFLabel.Location = new System.Drawing.Point(6, 60);
+            this.ArmorRPDEFLabel.Name = "ArmorRPDEFLabel";
+            this.ArmorRPDEFLabel.Size = new System.Drawing.Size(46, 13);
+            this.ArmorRPDEFLabel.TabIndex = 2;
+            this.ArmorRPDEFLabel.Text = "RPDEF:";
+            // 
+            // ArmorNameTextBox
+            // 
+            this.ArmorNameTextBox.Location = new System.Drawing.Point(74, 19);
+            this.ArmorNameTextBox.Name = "ArmorNameTextBox";
+            this.ArmorNameTextBox.Size = new System.Drawing.Size(643, 20);
+            this.ArmorNameTextBox.TabIndex = 1;
+            // 
+            // ArmorNameLabel
+            // 
+            this.ArmorNameLabel.AutoSize = true;
+            this.ArmorNameLabel.Location = new System.Drawing.Point(6, 19);
+            this.ArmorNameLabel.Name = "ArmorNameLabel";
+            this.ArmorNameLabel.Size = new System.Drawing.Size(41, 13);
+            this.ArmorNameLabel.TabIndex = 0;
+            this.ArmorNameLabel.Text = "Name: ";
+            // 
             // SaveButton
             // 
             this.SaveButton.Location = new System.Drawing.Point(12, 530);
@@ -405,26 +511,28 @@
             // PowerTypeSelectionComboBox
             // 
             this.PowerTypeSelectionComboBox.FormattingEnabled = true;
-            this.PowerTypeSelectionComboBox.Location = new System.Drawing.Point(93, 478);
+            this.PowerTypeSelectionComboBox.Location = new System.Drawing.Point(12, 503);
             this.PowerTypeSelectionComboBox.Name = "PowerTypeSelectionComboBox";
             this.PowerTypeSelectionComboBox.Size = new System.Drawing.Size(99, 21);
             this.PowerTypeSelectionComboBox.TabIndex = 8;
             // 
-            // ApplyEnergyReserveButton
+            // EditPowerButton
             // 
-            this.ApplyEnergyReserveButton.Location = new System.Drawing.Point(642, 487);
-            this.ApplyEnergyReserveButton.Name = "ApplyEnergyReserveButton";
-            this.ApplyEnergyReserveButton.Size = new System.Drawing.Size(75, 23);
-            this.ApplyEnergyReserveButton.TabIndex = 7;
-            this.ApplyEnergyReserveButton.Text = "Apply";
-            this.ApplyEnergyReserveButton.UseVisualStyleBackColor = true;
-            this.ApplyEnergyReserveButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            this.EditPowerButton.Location = new System.Drawing.Point(104, 476);
+            this.EditPowerButton.Name = "EditPowerButton";
+            this.EditPowerButton.Size = new System.Drawing.Size(75, 23);
+            this.EditPowerButton.TabIndex = 10;
+            this.EditPowerButton.Text = "Edit";
+            this.EditPowerButton.UseVisualStyleBackColor = true;
+            this.EditPowerButton.Click += new System.EventHandler(this.EditPowerButton_Click);
             // 
             // Character_Editter_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 565);
+            this.Controls.Add(this.EditPowerButton);
+            this.Controls.Add(this.ArmorGroupBox);
             this.Controls.Add(this.PowerTypeSelectionComboBox);
             this.Controls.Add(this.DeletePowerButton);
             this.Controls.Add(this.AddPowerButton);
@@ -439,10 +547,6 @@
             this.Text = "Character_Editter_Form";
             this.CharacterGroupBox.ResumeLayout(false);
             this.CharacterGroupBox.PerformLayout();
-            this.EnergyReserveGroupBox.ResumeLayout(false);
-            this.EnergyReserveGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharChaUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharWilUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharIntUpDown)).EndInit();
@@ -450,6 +554,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.CharConUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharAgiUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CharStrUpDown)).EndInit();
+            this.EnergyReserveGroupBox.ResumeLayout(false);
+            this.EnergyReserveGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveRecoveryUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyReserveMaxEnergyUpDown)).EndInit();
+            this.ArmorGroupBox.ResumeLayout(false);
+            this.ArmorGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ArmorREDefUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArmorRPDefUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -493,5 +605,15 @@
         private System.Windows.Forms.Label EnergyReservePointCostLabel;
         private System.Windows.Forms.ComboBox PowerTypeSelectionComboBox;
         private System.Windows.Forms.Button ApplyEnergyReserveButton;
+        private System.Windows.Forms.GroupBox ArmorGroupBox;
+        private System.Windows.Forms.Button ArmorApplyButton;
+        private System.Windows.Forms.Label ArmorPointCostLabel;
+        private System.Windows.Forms.NumericUpDown ArmorREDefUpDown;
+        private System.Windows.Forms.Label ARMORREDEFLABEL;
+        private System.Windows.Forms.NumericUpDown ArmorRPDefUpDown;
+        private System.Windows.Forms.Label ArmorRPDEFLabel;
+        private System.Windows.Forms.TextBox ArmorNameTextBox;
+        private System.Windows.Forms.Label ArmorNameLabel;
+        private System.Windows.Forms.Button EditPowerButton;
     }
 }

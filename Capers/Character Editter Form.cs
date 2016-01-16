@@ -19,13 +19,17 @@ namespace Capers
             Energy_Reserve,
             Armor
         }
-        selectiontype Selected = selectiontype.Character;
+        Character SelectedCharacter;
+        Power SelectedPower;
+        selectiontype SelectedType = selectiontype.Character;
         public Character_Editter_Form()
         {
             InitializeComponent();
             CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
             CharactersListBox.SelectedIndex = -1;
             PowerTypeSelectionComboBox.Items.Add("Energy Reserve");
+            PowerTypeSelectionComboBox.Items.Add("Armor");
+            PowerTypeSelectionComboBox.Items.Add("Energy Blast");
             CharacterGroupBox.Visible = false;
             EnergyReserveGroupBox.Visible = false;
         }
@@ -36,18 +40,18 @@ namespace Capers
             {
                 return;
             }
-            Character c = (Character)CharactersListBox.Items[CharactersListBox.SelectedIndex];
-            PowersListBox.DataSource = c.Powers;
+            SelectedCharacter = (Character)CharactersListBox.Items[CharactersListBox.SelectedIndex];
+            PowersListBox.DataSource = SelectedCharacter.Powers;
             PowersListBox.SelectedIndex = -1;
-            CharNameTextBox.Text = c.Name;
-            CharStrUpDown.Value = c.Str;
-            CharConUpDown.Value = c.End;
-            CharEndUpDown.Value = c.End;
-            CharAgiUpDown.Value = c.Agi;
-            CharIntUpDown.Value = c.Intel;
-            CharWilUpDown.Value = c.Wil;
-            CharChaUpDown.Value = c.Cha;
-            int points = c.PointSpent;
+            CharNameTextBox.Text = SelectedCharacter.Name;
+            CharStrUpDown.Value = SelectedCharacter.Str;
+            CharConUpDown.Value = SelectedCharacter.End;
+            CharEndUpDown.Value = SelectedCharacter.End;
+            CharAgiUpDown.Value = SelectedCharacter.Agi;
+            CharIntUpDown.Value = SelectedCharacter.Intel;
+            CharWilUpDown.Value = SelectedCharacter.Wil;
+            CharChaUpDown.Value = SelectedCharacter.Cha;
+            int points = SelectedCharacter.PointSpent;
             PointsLabel.Text = points.ToString();
             CharacterTierLabel.Text = "Tier: Normal";
             if (points > 25)
@@ -64,24 +68,26 @@ namespace Capers
                 CharacterTierLabel.Text = "Tier: High-power Super";
             if (points > 500)
                 CharacterTierLabel.Text = "Tier: Cosmically Powerful Super";
-            Selected = selectiontype.Character;
+            SelectedType = selectiontype.Character;
             CharacterGroupBox.Visible = true;
             EnergyReserveGroupBox.Visible = false;
+            ArmorGroupBox.Visible = false;
         }
-
         private void PowersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             CharacterGroupBox.Visible = false;
+            EnergyReserveGroupBox.Visible = false;
+            ArmorGroupBox.Visible = false;
             if (PowersListBox.SelectedIndex < 0)
             {
                 return;
             }
-            Power p = (Power)PowersListBox.Items[PowersListBox.SelectedIndex];
-            CharNameTextBox.Text = p.Name;
-            if (p is EnergyReserve)
+            SelectedPower = (Power)PowersListBox.Items[PowersListBox.SelectedIndex];
+            CharNameTextBox.Text = SelectedPower.Name;
+            if (SelectedPower is EnergyReserve)
             {
-                Selected = selectiontype.Energy_Reserve;
-                EnergyReserve EnRes = (EnergyReserve)p;
+                SelectedType = selectiontype.Energy_Reserve;
+                EnergyReserve EnRes = (EnergyReserve)SelectedPower;
                 EnRes.calculatecost();
                 EnergyReservePointCostLabel.Text = "Cost: " + EnRes.PointCost;
                 EnergyReserveNameTextBox.Text = EnRes.Name;
@@ -90,18 +96,26 @@ namespace Capers
                 EnergyReserveGroupBox.Visible = true;
                 EnergyReserveGroupBox.BringToFront();
             }
-            if (p is EnergyBlast)
+            if (SelectedPower is EnergyBlast)
             {
-                Selected = selectiontype.Energy_Blast;
+                SelectedType = selectiontype.Energy_Blast;
             }
-            if (p is Armor)
+            if (SelectedPower is Armor)
             {
-                Selected = selectiontype.Armor;
+                SelectedType = selectiontype.Armor;
+                Armor Arm = (Armor)SelectedPower;
+                Arm.calculatecost();
+                ArmorPointCostLabel.Text = "Cost: " + Arm.PointCost;
+                ArmorNameTextBox.Text = Arm.Name;
+                ArmorRPDefUpDown.Value = Arm.RPDEF;
+                ArmorREDefUpDown.Value = Arm.REDEF;
+                ArmorGroupBox.Visible = true;
+                ArmorGroupBox.BringToFront();
             }
         }
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            if (Selected == selectiontype.Character)
+            if (SelectedType == selectiontype.Character)
             {
                 int index = CharactersListBox.SelectedIndex;
                 Character c = (Character)CharactersListBox.SelectedItem;
@@ -117,13 +131,26 @@ namespace Capers
                 CharactersListBox.DataSource = Database.GetActiveDatabase().CharList();
                 CharactersListBox.SelectedIndex = index;
             }
-            else if (Selected == selectiontype.Energy_Reserve)
+            else if (SelectedType == selectiontype.Energy_Reserve)
             {
                 int index = PowersListBox.SelectedIndex;
                 EnergyReserve EnRes = (EnergyReserve)PowersListBox.SelectedItem;
                 EnRes.Name = EnergyReserveNameTextBox.Text;
                 EnRes.MaxEnergy = (int)EnergyReserveMaxEnergyUpDown.Value;
                 EnRes.Recovery = (int)EnergyReserveRecoveryUpDown.Value;
+                PowersListBox.DataSource = null;
+                PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
+                PowersListBox.SelectedIndex = index;
+            }
+            else if (SelectedType == selectiontype.Armor)
+            {
+                int index = PowersListBox.SelectedIndex;
+                Armor Arm = (Armor)PowersListBox.SelectedItem;
+                Arm.Name = ArmorNameTextBox.Text;
+                Arm.Remove((Character)CharactersListBox.SelectedItem);
+                Arm.RPDEF = (int)ArmorRPDefUpDown.Value;
+                Arm.REDEF = (int)ArmorREDefUpDown.Value;
+                Arm.Apply((Character)CharactersListBox.SelectedItem);
                 PowersListBox.DataSource = null;
                 PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
                 PowersListBox.SelectedIndex = index;
@@ -185,8 +212,30 @@ namespace Capers
                 En.Name = "Energy Reserve";
                 (CharactersListBox.SelectedItem as Character).addpower(En);
             }
+            if (string.Compare((string)PowerTypeSelectionComboBox.SelectedItem, "Armor") == 0)
+            {
+                Armor Arm = new Armor();
+                Arm.Name = "Armor";
+                (CharactersListBox.SelectedItem as Character).addpower(Arm);
+            }
+            if (string.Compare((string)PowerTypeSelectionComboBox.SelectedItem, "Energy Blast") == 0)
+            {
+                EnergyBlast En = new EnergyBlast();
+                En.Name = "Energy Blast";
+                (CharactersListBox.SelectedItem as Character).addpower(En);
+            }
             PowersListBox.DataSource = null;
             PowersListBox.DataSource = (CharactersListBox.SelectedItem as Character).Powers;
+        }
+
+        private void EditPowerButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedType == selectiontype.Energy_Blast)
+            {
+                EnergyBlast En = (EnergyBlast)SelectedPower;
+                EnergyBlastEditForm EditForm = new EnergyBlastEditForm(SelectedCharacter,En);
+                EditForm.ShowDialog();
+            }
         }
     }
 }

@@ -53,6 +53,12 @@
     </Compile>
     <Compile Include="Character.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="EnergyBlastEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnergyBlastEditForm.Designer.cs">
+      <DependentUpon>EnergyBlastEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IDealsDamage.cs" />
     <Compile Include="IDisplayable.cs" />
@@ -70,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Character Editter Form.resx">
       <DependentUpon>Character Editter Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnergyBlastEditForm.resx">
+      <DependentUpon>EnergyBlastEditForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
